@@ -32,17 +32,6 @@ class L5bCrud extends Command
         parent::__construct();
     }
 
-	/**
-	 * Get the default namespace for the class.
-	 *
-	 * @param  string  $rootNamespace
-	 * @return string
-	 */
-	protected function getDefaultNamespace($rootNamespace)
-	{
-		return $rootNamespace . '\..\routes\breadcrumbs\backend';
-    }
-
     /**
      * Execute the console command.
      *
@@ -52,194 +41,201 @@ class L5bCrud extends Command
     {
         $name = strtolower(str_singular($this->argument('name')));
 
-        $arrayName      = str_plural($name);                // examples
-        $attributeName  = ucfirst($name) . "Attribute";     // ExampleAttribute
-        $controllerName = ucfirst($name) . "Controller";    // ExampleController
-        $labelName      = str_plural($name);                // examples
-        $migrationName  = date('Y_m_d_His_') . "create_" .
-                          str_plural($name)."_table";       // YYYY_MM_DD_HHMMSS_create_examples_table
-        $migrationClass = "Create" .
-                          ucfirst(str_plural($name)) .
-                          "Table";                          // CreateExamplesTable
-        $migrationTable = str_plural($name);                // examples
-        $modelName      = ucfirst($name);                   // Example
-        $requestName    = ucfirst($name) . "Request";       // ExampleRequest
-        $routeName      = str_plural($name);                // examples
-        $variableName   = $name;                            // example
-        $viewName       = $name;                            // example
-
-        // Create Model "Name"
-        $this->line('Model: \\Models\\' . ucfirst($name));
+        // Create Model "ExampleModel.php"
         Artisan::call(
-            'l5b:model',
+            'l5b:stub',
             [
-                'name'      => ucfirst($name),
-                'model'     => $modelName,
-                'attribute' => $attributeName,
+                'name'              => ucfirst($name),                  // Example
+                'stub'              => '/Console/Commands/Stubs/make-model.stub',
+                'namespace'         => '\Models',
+                'attribute'         => ucfirst($name) . "Attribute",    // ExampleAttribute
+                'model'             => ucfirst($name),                  // Example
             ]);
 
-        // Create Attribute "NameAttribute"
-        $this->line('Attribute: \\Models\\Traits\\Attribute\\' . ucfirst($name) . 'Attribute');
+        // Create Attribute Trait "ExampleAttribute.php"
         Artisan::call(
-            'l5b:attribute',
+            'l5b:stub',
             [
-                'name'      => ucfirst($name) . "Attribute",
-                'attribute' => $attributeName,
-                'route'     => $routeName,
-                'label'     => $labelName,
+                'name'              => ucfirst($name) . "Attribute",    // ExampleAttribute
+                'stub'              => '/Console/Commands/Stubs/make-attribute.stub',
+                'namespace'         => '\Models\Traits\Attribute',
+                'attribute'         => ucfirst($name) . "Attribute",    // ExampleAttribute
+                'route'             => str_plural($name),               // examples
+                'label'             => str_plural($name),               // examples
             ]);
 
-        // Create Controller "NameController"
-        $this->line('Controller: \\Controllers\\Backend\\' . ucfirst($name) . 'Controller');
+        // Create Controller "ExampleController.php"
         Artisan::call(
-            'l5b:controller',
+            'l5b:stub',
             [
                 'name'          => ucfirst($name) . "Controller",
-                'array'         => $arrayName,
-                'controller'    => $controllerName,
-                'label'         => $labelName,
-                'model'         => $modelName,
-                'request'       => $requestName,
-                'route'         => $routeName,
-                'variable'      => $variableName,
-                'view'          => $viewName,
+                'stub'          => '/Console/Commands/Stubs/make-controller.stub',
+                'namespace'     => '\Http\Controllers\Backend',
+                'array'         => str_plural($name),
+                'controller'    => ucfirst($name) . "Controller",
+                'label'         => str_plural($name),
+                'model'         => ucfirst($name),
+                'request'       => ucfirst($name) . "Request",
+                'route'         => str_plural($name),
+                'variable'      => $name,
+                'view'          => $name,
             ]);
 
-        // Create Validation Requests "StoreNameController" and "UpdateNameController"
-        $this->line('Request: \\Requests\\Backend\\Store' . ucfirst($name) . 'Request');
+        // Create Validation Request "StoreExampleController.php"
         Artisan::call(
-            'l5b:requests',
+            'l5b:stub',
             [
                 'name'      => "Store" . ucfirst($name) . "Request",
                 'stub'      => '/Console/Commands/Stubs/make-store-request.stub',
-                'model'     => $modelName,
+                'namespace' => '\Http\Requests\Backend',
+                'model'     => ucfirst($name),
             ]);
 
+        // Create Validation Request "UpdateExampleController.php"
         Artisan::call(
-            'l5b:requests',
+            'l5b:stub',
             [
                 'name'      => "Update" . ucfirst($name) . "Request",
                 'stub'      => '/Console/Commands/Stubs/make-update-request.stub',
-                'model'     => $modelName,
+                'namespace' => '\Http\Requests\Backend',
+                'model'     => ucfirst($name),
             ]);
 
-        // Create Migration
-        $this->line('Migration: \\database\\migrations\\' . date('Y_m_d_His_')."create_".str_plural($name)."_table");
+        // Create Migration "YYYY_MM_DD_HHMMSS_create_examples_table.php"
         Artisan::call(
-            'l5b:migration',
+            'l5b:stub',
             [
-                'name'  => $migrationName,
-                'class' => $migrationClass,
-                'table' => $migrationTable,
+                'name'      => date('Y_m_d_His_') . "create_" . str_plural($name)."_table",
+                'stub'      => '/Console/Commands/Stubs/make-migration.stub',
+                'namespace' => '\..\database\migrations',
+                'class'     => "Create" . ucfirst(str_plural($name)) . "Table",
+                'table'     => str_plural($name),
             ]);
-        Artisan::call('migrate');
 
-        // Create Routes
-        $this->line('Routes: \\routes\\backend\\' . str_plural($name) . ".php");
+        // Migrate table
+        // Artisan::call('migrate');
+
+        // Create Routes "examples.php"
         Artisan::call(
-            'l5b:routes',
+            'l5b:stub',
             [
-                'name'          => $routeName,
-                'controller'    => $controllerName,
-                'route'         => $routeName,
+                'name'          => str_plural($name),
+                'stub'          => '/Console/Commands/Stubs/make-routes.stub',
+                'namespace'     => '\..\routes\backend',
+                'controller'    => ucfirst($name) . "Controller",
+                'route'         => str_plural($name),
             ]);
 
-        // Create Breadcrumbs
-        $this->line('Breadcrumbs: \\routes\\breadcrumbs\\backend\\' . $name . ".php");
+        // Create Breadcrumbs "examples.php"
         Artisan::call(
-            'l5b:breadcrumbs',
+            'l5b:stub',
             [
-                'name'  => $name,
-                'route' => $routeName,
+                'name'          => $name,
+                'stub'          => '/Console/Commands/Stubs/make-breadcrumbs.stub',
+                'namespace'     => '\..\routes\breadcrumbs\backend',
+                'route'         => str_plural($name),
             ]);
 
+        // Include breadcrumb file in backend.php
         $require_breadcrumb = "require __DIR__.'/$name.php';";
         $myfile = file_put_contents(base_path('routes/breadcrumbs/backend/backend.php'), PHP_EOL . $require_breadcrumb, FILE_APPEND | LOCK_EX);
 
-        // Create Views
-        $this->line('View: \\resources\\views\\backend\\' . $name . '\\index.blade.php');
+        // Create View "example/index.blade.php"
         Artisan::call(
-            'l5b:views',
+            'l5b:stub',
             [
                 'name'      => 'index.blade',
                 'stub'      => '/Console/Commands/Stubs/make-views-index.stub',
-                'label'     => $labelName,
-                'array'     => $arrayName,
-                'route'     => $routeName,
-                'variable'  => $variableName,
-                'view'      => $viewName,
+                'namespace' => '\..\resources\views\backend' . '\\' . $name,
+                'label'     => str_plural($name),
+                'array'     => str_plural($name),
+                'route'     => str_plural($name),
+                'variable'  => $name,
+                'view'      => $name,
             ]);
 
+        // Create View "example/create.blade.php"
         Artisan::call(
-            'l5b:views',
-            [
-                'name'      => 'edit.blade',
-                'stub'      => '/Console/Commands/Stubs/make-views-edit.stub',
-                'label'     => $labelName,
-                'array'     => $arrayName,
-                'route'     => $routeName,
-                'variable'  => $variableName,
-                'view'      => $viewName,
-            ]);
-
-        Artisan::call(
-            'l5b:views',
+            'l5b:stub',
             [
                 'name'      => 'create.blade',
                 'stub'      => '/Console/Commands/Stubs/make-views-create.stub',
-                'label'     => $labelName,
-                'array'     => $arrayName,
-                'route'     => $routeName,
-                'variable'  => $variableName,
-                'view'      => $viewName,
+                'namespace' => '\..\resources\views\backend' . '\\' . $name,
+                'label'     => str_plural($name),
+                'array'     => str_plural($name),
+                'route'     => str_plural($name),
+                'variable'  => $name,
+                'view'      => $name,
             ]);
 
+        // Create View "example/edit.blade.php"
         Artisan::call(
-            'l5b:views',
+            'l5b:stub',
+            [
+                'name'      => 'edit.blade',
+                'stub'      => '/Console/Commands/Stubs/make-views-edit.stub',
+                'namespace' => '\..\resources\views\backend' . '\\' . $name,
+                'label'     => str_plural($name),
+                'array'     => str_plural($name),
+                'route'     => str_plural($name),
+                'variable'  => $name,
+                'view'      => $name,
+            ]);
+
+        // Create View "example/show.blade.php"
+        Artisan::call(
+            'l5b:stub',
             [
                 'name'      => 'show.blade',
                 'stub'      => '/Console/Commands/Stubs/make-views-show.stub',
-                'label'     => $labelName,
-                'array'     => $arrayName,
-                'route'     => $routeName,
-                'variable'  => $variableName,
-                'view'      => $viewName,
+                'namespace' => '\..\resources\views\backend' . '\\' . $name,
+                'label'     => str_plural($name),
+                'array'     => str_plural($name),
+                'route'     => str_plural($name),
+                'variable'  => $name,
+                'view'      => $name,
             ]);
 
-            Artisan::call(
-                'l5b:views',
-                [
-                    'name'      => 'deleted.blade',
-                    'stub'      => '/Console/Commands/Stubs/make-views-deleted.stub',
-                    'label'     => $labelName,
-                    'array'     => $arrayName,
-                    'route'     => $routeName,
-                    'variable'  => $variableName,
-                    'view'      => $viewName,
-                ]);
+        // Create View "example/deleted.blade.php"
+        Artisan::call(
+            'l5b:stub',
+            [
+                'name'      => 'deleted.blade',
+                'stub'      => '/Console/Commands/Stubs/make-views-deleted.stub',
+                'namespace' => '\..\resources\views\backend' . '\\' . $name,
+                'label'     => str_plural($name),
+                'array'     => str_plural($name),
+                'route'     => str_plural($name),
+                'variable'  => $name,
+                'view'      => $name,
+            ]);
 
-            Artisan::call(
-                'l5b:views',
-                [
-                    'name'      => '/includes/breadcrumb-links.blade',
-                    'stub'      => '/Console/Commands/Stubs/make-views-breadcrumb-links.stub',
-                    'label'     => $labelName,
-                    'array'     => $arrayName,
-                    'route'     => $routeName,
-                    'variable'  => $variableName,
-                    'view'      => $viewName,
-                ]);
+        // Create View "example/includes/breadcrumb-links.blade.php"
+        Artisan::call(
+            'l5b:stub',
+            [
+                'name'      => '/includes/breadcrumb-links.blade',
+                'stub'      => '/Console/Commands/Stubs/make-views-breadcrumb-links.stub',
+                'namespace' => '\..\resources\views\backend' . '\\' . $name,
+                'label'     => str_plural($name),
+                'array'     => str_plural($name),
+                'route'     => str_plural($name),
+                'variable'  => $name,
+                'view'      => $name,
+            ]);
 
-            Artisan::call(
-                'l5b:views',
-                [
-                    'name'      => '/includes/header-buttons.blade',
-                    'stub'      => '/Console/Commands/Stubs/make-views-header-buttons.stub',
-                    'label'     => $labelName,
-                    'array'     => $arrayName,
-                    'route'     => $routeName,
-                    'variable'  => $variableName,
-                    'view'      => $viewName,
-                ]);
+        // Create View "example/includes/header-buttons.blade.php"
+        Artisan::call(
+            'l5b:stub',
+            [
+                'name'      => '/includes/header-buttons.blade',
+                'stub'      => '/Console/Commands/Stubs/make-views-header-buttons.stub',
+                'namespace' => '\..\resources\views\backend' . '\\' . $name,
+                'label'     => str_plural($name),
+                'array'     => str_plural($name),
+                'route'     => str_plural($name),
+                'variable'  => $name,
+                'view'      => $name,
+            ]);
     }
 }

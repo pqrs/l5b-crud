@@ -4,8 +4,10 @@ Creates a Model, Controller (with validation Requests), Routes, Breadcrumbs and 
 
 ## Requires
 
-[Laravel 5](https://laravel.com)
-[rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/)
+- [Laravel 5](https://laravel.com)
+- [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/)
+
+It has been tested with Laravel 5.7.
 
 ## Install
 

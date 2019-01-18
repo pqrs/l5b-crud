@@ -21,9 +21,9 @@ Packagist Composer repository (TODO)
 
 From your root folder:
 
-'''
+```
 php artisan l5b:crud example
-'''
+```
 
 Where _example_ is the name you want for your model (routes, views, controllers,...).
 
@@ -31,7 +31,9 @@ Where _example_ is the name you want for your model (routes, views, controllers,
 
 ### Model
 
-_app/Models/Example.php:_
+_
+app/Models/Example.php
+_
 
 ### Trait Attribute
 

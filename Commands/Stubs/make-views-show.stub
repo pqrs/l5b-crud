@@ -1,0 +1,63 @@
+@extends('backend.layouts.app')
+
+@section('title', __('labels.backend.DummyLabel.management') . ' | ' . __('labels.backend.DummyLabel.view'))
+
+@section('breadcrumb-links')
+    @include('backend.DummyView.includes.breadcrumb-links')
+@endsection
+
+@section('content')
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-5">
+                <h4 class="card-title mb-0">
+                    @lang('labels.backend.DummyLabel.management')
+                    <small class="text-muted">@lang('labels.backend.DummyLabel.view')</small>
+                </h4>
+            </div><!--col-->
+        </div><!--row-->
+
+        <div class="row mt-4 mb-4">
+            <div class="col">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-expanded="true"><i class="fas fa-user"></i> @lang('labels.backend.DummyLabel.tabs.titles.overview')</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview" role="tabpanel" aria-expanded="true">
+
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>@lang('labels.backend.DummyLabel.tabs.content.overview.title')</th>
+                                        <td>{{ $DummyVariable->title }}</td>
+                                    </tr>
+                                </table>
+                            </div><!--table-responsive-->
+                        </div><!--col-->
+
+                    </div><!--tab-->
+                </div><!--tab-content-->
+            </div><!--col-->
+        </div><!--row-->
+    </div><!--card-body-->
+
+    <div class="card-footer">
+        <div class="row">
+            <div class="col">
+                <small class="float-right text-muted">
+                    <strong>@lang('labels.backend.DummyLabel.tabs.content.overview.created_at'):</strong> {{ timezone()->convertToLocal($DummyVariable->created_at) }} ({{ $DummyVariable->created_at->diffForHumans() }}),
+                    <strong>@lang('labels.backend.DummyLabel.tabs.content.overview.last_updated'):</strong> {{ timezone()->convertToLocal($DummyVariable->updated_at) }} ({{ $DummyVariable->updated_at->diffForHumans() }})
+                    @if($DummyVariable->trashed())
+                        <strong>@lang('labels.backend.DummyLabel.tabs.content.overview.deleted_at'):</strong> {{ timezone()->convertToLocal($DummyVariable->deleted_at) }} ({{ $DummyVariable->deleted_at->diffForHumans() }})
+                    @endif
+                </small>
+            </div><!--col-->
+        </div><!--row-->
+    </div><!--card-footer-->
+</div><!--card-->
+@endsection

@@ -1,0 +1,153 @@
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+use App\Models\DummyModel;
+use App\Http\Requests\Backend\StoreDummyRequest;
+use App\Http\Requests\Backend\UpdateDummyRequest;
+
+class DummyController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $DummyArray = DummyModel::paginate(25);
+
+        return view('backend.DummyView.index', compact('DummyArray'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('backend.DummyView.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreDummyRequest $request)
+    {
+        $DummyVariable = new DummyModel;
+
+        $DummyVariable->title = $request['title'];
+
+        $DummyVariable->save();
+
+        return redirect()->route('admin.DummyVariables.index')->withFlashSuccess(__('alerts.backend.DummyView.created'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $DummyVariable = DummyModel::findOrFail($id);
+
+        return view('backend.DummyView.show', compact('DummyVariable'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $DummyVariable = DummyModel::find($id);
+
+        return view('backend.DummyView.edit', compact('DummyVariable'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateDummyRequest $request, $id)
+    {
+        $DummyVariable = DummyModel::findOrFail($id);
+
+        $DummyVariable->title     = $request['title'];
+
+        $DummyVariable->save();
+
+        return redirect()->route('admin.DummyRoute.show', $id)->withFlashSuccess(__('alerts.backend.DummyView.updated'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\DummyName  $DummyVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $DummyVariable = DummyModel::findOrFail($id);
+
+        $DummyVariable->delete();
+
+        return redirect()->route('admin.DummyRoute.index')->withFlashSuccess(__('alerts.backend.DummyLabel.deleted'));
+    }
+
+    /**
+     * Permanently remove the specified resource from storage.
+     *
+     * @param  \App\Models\DummyName  $DummyVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $DummyVariable = DummyModel::withTrashed()->findOrFail($id);
+
+        $DummyVariable->forceDelete();
+
+        return redirect()->route('admin.DummyRoute.index')->withFlashSuccess(__('alerts.backend.DummyLabel.deleted'));
+    }
+
+    /**
+     * Restore the specified soft deleted resource.
+     *
+     * @param  \App\Models\DummyName  $DummyVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $DummyVariable = DummyModel::withTrashed()->findOrFail($id);
+
+        $DummyVariable->restore();
+
+        return redirect()->route('admin.DummyRoute.index')->withFlashSuccess(__('alerts.backend.DummyLabel.deleted'));
+    }
+
+    /**
+     * Display a listing of deleted items of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleted()
+    {
+        $DummyArray = DummyModel::onlyTrashed()->paginate(25);
+
+        return view('backend.DummyView.deleted', compact('DummyArray'));
+    }
+}

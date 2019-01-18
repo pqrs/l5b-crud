@@ -1,0 +1,26 @@
+<?php
+
+Breadcrumbs::for('admin.DummyRoute.index', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push(__('labels.backend.DummyRoute.management'), route('admin.DummyRoute.index'));
+});
+
+Breadcrumbs::for('admin.DummyRoute.create', function ($trail) {
+    $trail->parent('admin.DummyRoute.index');
+    $trail->push(__('labels.backend.DummyRoute.create'), route('admin.DummyRoute.create'));
+});
+
+Breadcrumbs::for('admin.DummyRoute.show', function ($trail, $id) {
+    $trail->parent('admin.DummyRoute.index');
+    $trail->push(__('menus.backend.DummyRoute.view'), route('admin.DummyRoute.show', $id));
+});
+
+Breadcrumbs::for('admin.DummyRoute.edit', function ($trail, $id) {
+    $trail->parent('admin.DummyRoute.index');
+    $trail->push(__('menus.backend.DummyRoute.edit'), route('admin.DummyRoute.edit', $id));
+});
+
+Breadcrumbs::for('admin.DummyRoute.deleted', function ($trail) {
+    $trail->parent('admin.DummyRoute.index');
+    $trail->push(__('menus.backend.DummyRoute.deleted'), route('admin.DummyRoute.deleted'));
+});

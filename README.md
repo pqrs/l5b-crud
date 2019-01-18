@@ -1,6 +1,6 @@
 #CRUD artisan command for rappasoft/laravel-5-boilerplate
 
-Creates a Model, Controller (with validation Requests), Routes, Breadcrumbs and CRUD Views for the given name ready to work with in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
+Creates a Model, Controller (with validation Requests), Migration, Routes, Breadcrumbs and CRUD Views for the given name ready to work with in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
 
 ## Requires
 

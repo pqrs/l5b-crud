@@ -1,11 +1,11 @@
 #CRUD artisan command for rappasoft/laravel-5-boilerplate
 
-Creates a Model, Controller (with validation Requests), Routes, Breadcrumbs and CRUD Views for the given name ready to work with in [rappasoft/laravel-5-boilerplate](/rappasoft/laravel-5-boilerplate/) backend.
+Creates a Model, Controller (with validation Requests), Routes, Breadcrumbs and CRUD Views for the given name ready to work with in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
 
 ## Requires
 
 [Laravel 5](https://laravel.com)
-[rappasoft/laravel-5-boilerplate](/rappasoft/laravel-5-boilerplate/)
+[rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/)
 
 ## Install
 
@@ -19,7 +19,7 @@ Packagist Composer repository (TODO)
 
 ## Run
 
-From your root folder:
+In your Laravel project root folder:
 
 ```
 php artisan l5b:crud example
@@ -31,41 +31,55 @@ Where _example_ is the name you want for your model (routes, views, controllers,
 
 ### Model
 
-_
+```
 app/Models/Example.php
-_
+```
 
 ### Trait Attribute
 
-_app/Models/Traits/Attribute/ExampleAttribute.php_
+```
+app/Models/Traits/Attribute/ExampleAttribute.php
+```
 
 ### Controller
 
-_app/Http/Controllers/Backend/ExampleController.php_
+```
+app/Http/Controllers/Backend/ExampleController.php
+```
 
 ### Requests
 
-_app/Http/Requests/Backend/StoreExampleRequest.php_
-_app/Http/Requests/Backend/UpdateExampleRequest.php_
+```
+app/Http/Requests/Backend/StoreExampleRequest.php
+app/Http/Requests/Backend/UpdateExampleRequest.php
+```
 
 ### Migrations
 
-_database/migrations/\YYYY_MM_DD_create_examples_table.php_
+```
+database/migrations/\YYYY_MM_DD_create_examples_table.php
+```
 
 ### Routes
 
-_routes/backend/examples.php_
+```
+routes/backend/examples.php
+```
 
 ### Breadcrumbs
 
-_routes/breadcrumbs/backend/example.php_
+```
+routes/breadcrumbs/backend/example.php
+```
 
 ### Views
 
-_resources/views/backend/example/index.blade.php_
-_resources/views/backend/example/show.blade.php_
-_resources/views/backend/example/create.blade.php_
-_resources/views/backend/example/edit.blade.php_
-_resources/views/backend/example/deleted.blade.php_
-_resources/views/backend/example/includes/breadcrumb-links.blade.php_
-_resources/views/backend/example/includes/header-buttons.blade.php_
+```
+resources/views/backend/example/index.blade.php
+resources/views/backend/example/show.blade.php
+resources/views/backend/example/create.blade.php
+resources/views/backend/example/edit.blade.php
+resources/views/backend/example/deleted.blade.php
+resources/views/backend/example/includes/breadcrumb-links.blade.php
+resources/views/backend/example/includes/header-buttons.blade.php
+```

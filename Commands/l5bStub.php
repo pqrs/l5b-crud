@@ -8,35 +8,35 @@ use Symfony\Component\Console\Input\InputArgument;
 class L5bStub extends GeneratorCommand
 {
 	/**
-	 * The name and signature of the console command.
-	 *
-	 * @var string
-	 */
+	* The name and signature of the console command.
+	*
+	* @var string
+	*/
 	protected $name = 'l5b:stub';
 
 	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
+	* The console command description.
+	*
+	* @var string
+	*/
 	protected $description = 'Create crud views';
 
 	/**
-	 * The type of class being generated.
-	 *
-	 * @var string
-	 */
+	* The type of class being generated.
+	*
+	* @var string
+	*/
 	// protected $type = 'View';
 
-    /**
-     * Replace the class name for the given stub.
-     *
-     * @param  string  $stub
-     * @param  string  $name
-     * @return string
-     */
-    protected function replaceClass($stub, $name)
-    {
+	/**
+	* Replace the class name for the given stub.
+	*
+	* @param  string  $stub
+	* @param  string  $name
+	* @return string
+	*/
+	protected function replaceClass($stub, $name)
+	{
 		$search = [
 			'DummyArray',
 			'DummyAttribute',
@@ -75,37 +75,37 @@ class L5bStub extends GeneratorCommand
 	}
 
 	/**
-	 * Get the stub file for the generator.
-	 *
-	 * @return string
-	 */
+	* Get the stub file for the generator.
+	*
+	* @return string
+	*/
 	protected function getStub()
 	{
-        return app_path() . $this->argument('stub');
+		return app_path() . $this->argument('stub');
 	}
 
 	/**
-	 * Get the default namespace for the class.
-	 *
-	 * @param  string  $rootNamespace
-	 * @return string
-	 */
+	* Get the default namespace for the class.
+	*
+	* @param  string  $rootNamespace
+	* @return string
+	*/
 	protected function getDefaultNamespace($rootNamespace)
 	{
-        return $rootNamespace . $this->argument('namespace');
+		return $rootNamespace . $this->argument('namespace');
 	}
 
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            ['name', 			InputArgument::REQUIRED, 'File name'],
-            ['stub', 			InputArgument::REQUIRED, 'Stub name'],
-            ['namespace', 		InputArgument::REQUIRED, 'Namespace'],
+	/**
+	* Get the console command arguments.
+	*
+	* @return array
+	*/
+	protected function getArguments()
+	{
+		return [
+			['name', 			InputArgument::REQUIRED, 'File name'],
+			['stub', 			InputArgument::REQUIRED, 'Stub name'],
+			['namespace', 		InputArgument::REQUIRED, 'Namespace'],
 			['array',			InputArgument::OPTIONAL, '', null],
 			['attribute',		InputArgument::OPTIONAL, '', null],
 			['class',			InputArgument::OPTIONAL, '', null],
@@ -120,6 +120,6 @@ class L5bStub extends GeneratorCommand
 			['table',			InputArgument::OPTIONAL, '', null],
 			['variable',		InputArgument::OPTIONAL, '', null],
 			['view',			InputArgument::OPTIONAL, '', null],
-        ];
-    }
+		];
+	}
 }

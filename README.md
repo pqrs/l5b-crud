@@ -27,7 +27,9 @@ In your Laravel project root folder:
 php artisan l5b:crud example
 ```
 
-Where _example_ is the name you want for your model (routes, views, controllers,...).
+Where _example_ is the name you want for your model (routes, views, controllers,...). I've tried to follow naming best practices and it uses plural or singular names and lower or uppercase where needed.
+
+Parameters _example_, _Example_, _examples_ or _EXAMPLES_ all give the same results.
 
 Then run the created migration:
 
@@ -41,7 +43,7 @@ In your browser open:
 https://YOUR_SITE/admin/examples
 ```
 
-**et voilà!**
+**...et voilà! :)**
 
 ## Suggestions
 
@@ -57,9 +59,13 @@ You can add this piece of code to _/resources/views/backend/includes/sidebar.bla
 
 ## Strings
 
+These are the labels.php, menus.php and validation.php English strings needed, copy them into the files in _/resources/lang/en/_ or whatever other language folder you may need. Replace "Example" for the name of your Model.
+
+TODO: generate a file with your choosen name ready to copy paste.
+
 _labels.php_ under **'backend'**:
 
-```
+```asdf
         'examples' => [
             'management'    => 'Example Management',
             'active'        => 'Active Examples',

@@ -31,6 +31,7 @@ trait DummyAttribute
     public function getDeleteButtonAttribute()
     {
         return '<a href="'.route('admin.DummyRoute.destroy', $this).'"
+                title="'.__('buttons.general.crud.delete').'"
                 data-method="delete"
                 data-trans-button-cancel="'.__('buttons.general.cancel').'"
                 data-trans-button-confirm="'.__('buttons.general.crud.delete').'"

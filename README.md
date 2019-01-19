@@ -38,7 +38,7 @@ php artisan migrate
 In your browser open:
 
 ```
-https://YOUR_SITE_/admin/examples
+https://YOUR_SITE/admin/examples
 ```
 
 **et voilà!**
@@ -53,6 +53,69 @@ You can add this piece of code to _/resources/views/backend/includes/sidebar.bla
         <i class="nav-icon icon-speedometer"></i> @lang('menus.backend.sidebar.examples')
     </a>
 </li>
+```
+
+## Strings
+
+_labels.php_ under **'backend'**:
+
+```
+        'examples' => [
+            'management'    => 'Example Management',
+            'active'        => 'Active Examples',
+            'view'          => 'View Example',
+            'edit'          => 'Edit Example',
+            'create'        => 'Create Example',
+            'create_new'    => 'Create New Example',
+            'table'         => [
+                'title'         => 'Title',
+                'created'       => 'Created',
+                'last_updated'  => 'Last Updated',
+                'deleted'       => 'Deleted',
+                'actions'       => 'Actions',
+                'tab_title'     => 'Overview',
+                'total'         => 'example total|examples total',
+            ],
+
+            'tabs' => [
+                'title' => 'Overview',
+                'content' => [
+                    'overview'  => [
+                        'title'         => 'Title',
+                        'created_at'    => 'Created',
+                        'last_updated'  => 'Last Updated',
+                    ],
+                ],
+            ],
+
+        ],
+```
+
+_menus.php_ under **'backend'**
+
+```
+        'examples' => [
+            'main'            => 'Examples',
+            'all'             => 'All Examples',
+            'create'          => 'Create Example',
+            'deleted'         => 'Deleted Examples',
+            'view'            => 'View Example',
+            'edit'            => 'Edit Example',
+        ],
+```
+
+_menus.php_ under **'backend' => 'sidebar'**
+
+```
+    'examples'  => 'Examples',
+```
+
+_validation.php_ under **'attributes' => 'backend'**
+
+```
+            'examples' => [
+                'title'            => 'Title',
+            ],
 ```
 
 ## Files created

@@ -30,7 +30,7 @@
                             <th>@lang('labels.backend.DummyLabel.table.title')</th>
                             <th>@lang('labels.backend.DummyLabel.table.created')</th>
                             <th>@lang('labels.backend.DummyLabel.table.last_updated')</th>
-                            <th>@lang('labels.general.actions')</th>
+                            <th>@lang('labels.backend.DummyLabel.table.actions')</th>
                         </tr>
                         </thead>
                         <tbody>

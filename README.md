@@ -37,6 +37,8 @@ Then run the created migration:
 php artisan migrate
 ```
 
+Note: out of the box, the table comes only with a _title_ text field, besides the _id_, _deleted_at_, _created_at_ and _updated_at_. Edit your newly created migration file to add any other you may need befor run the migrate command.
+
 In your browser open:
 
 ```
@@ -138,11 +140,15 @@ app/Models/Example.php
 app/Models/Traits/Attribute/ExampleAttribute.php
 ```
 
+This is where the action buttons for the new object are.
+
 ### Controller
 
 ```
 app/Http/Controllers/Backend/ExampleController.php
 ```
+
+It contains the CRUD methods: _index_, _create_, _store_, _show_, _edit_, _update_, _destroy_, _delete_, _restore_ and _deleted_. 
 
 ### Requests
 
@@ -150,6 +156,8 @@ app/Http/Controllers/Backend/ExampleController.php
 app/Http/Requests/Backend/StoreExampleRequest.php
 app/Http/Requests/Backend/UpdateExampleRequest.php
 ```
+
+Validation store and update Requests.
 
 ### Migrations
 
@@ -163,11 +171,16 @@ database/migrations/\YYYY_MM_DD_create_examples_table.php
 routes/backend/examples.php
 ```
 
+Contains the named routes _admin.examples.index_, _admin.examples.deleted_, _admin.examples.restore_, _delete-permanently_, _admin.examples.create_, _admin.examples.store_, _admin.examples.show_, _admin.examples.edit_, _admin.examples.update_ and _admin.examples.destroy_.
+
 ### Breadcrumbs
 
 ```
 routes/breadcrumbs/backend/example.php
 ```
+
+This has the breadcrumbs for the routes
+_admin.borrames.index_, _admin.borrames.create_, _admin.borrames.show_, _admin.borrames.edit_ and _admin.borrames.deleted_.
 
 The following line is added to _routes/breadcrumbs/backend/backend.php_:
 
@@ -188,6 +201,8 @@ resources/views/backend/example/deleted.blade.php
 resources/views/backend/example/includes/breadcrumb-links.blade.php
 resources/views/backend/example/includes/header-buttons.blade.php
 ```
+
+If you add more fields to your datatable, you'll have to edit _show.blade.php_, _create.blade.php_ and _edit.blade.php_ to suit your needs.
 
 ## License
 

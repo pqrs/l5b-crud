@@ -148,7 +148,7 @@ This is where the action buttons for the new object are.
 app/Http/Controllers/Backend/ExampleController.php
 ```
 
-It contains the CRUD methods: _index_, _create_, _store_, _show_, _edit_, _update_, _destroy_, _delete_, _restore_ and _deleted_. 
+It contains the CRUD methods: _index_, _create_, _store_, _show_, _edit_, _update_, _destroy_, _delete_, _restore_ and _deleted_.
 
 ### Requests
 
@@ -180,7 +180,7 @@ routes/breadcrumbs/backend/example.php
 ```
 
 This has the breadcrumbs for the routes
-_admin.borrames.index_, _admin.borrames.create_, _admin.borrames.show_, _admin.borrames.edit_ and _admin.borrames.deleted_.
+_admin.examples.index_, _admin.examples.create_, _admin.examples.show_, _admin.examples.edit_ and _admin.examples.deleted_.
 
 The following line is added to _routes/breadcrumbs/backend/backend.php_:
 

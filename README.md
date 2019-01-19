@@ -52,20 +52,20 @@ You can add this piece of code to _/resources/views/backend/includes/sidebar.bla
 ```
 <li class="nav-item">
     <a class="nav-link {{ active_class(Active::checkUriPattern('admin/examples*')) }}" href="{{ route('admin.examples.index') }}">
-        <i class="nav-icon icon-speedometer"></i> @lang('menus.backend.sidebar.examples')
+        <i class="nav-icon icon-whatever"></i> @lang('menus.backend.sidebar.examples')
     </a>
 </li>
 ```
 
 ## Strings
 
-These are the labels.php, menus.php and validation.php English strings needed, copy them into the files in _/resources/lang/en/_ or whatever other language folder you may need. Replace "Example" for the name of your Model.
+These are the _labels.php_, _menus.php_ and _validation.php_ English strings needed, copy them into the files in _/resources/lang/en/_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
 
-TODO: generate a file with your choosen name ready to copy paste.
+TODO: generate a file with your choosen name ready to copy&paste.
 
 _labels.php_ under **'backend'**:
 
-```asdf
+```
         'examples' => [
             'management'    => 'Example Management',
             'active'        => 'Active Examples',
@@ -168,6 +168,14 @@ routes/backend/examples.php
 ```
 routes/breadcrumbs/backend/example.php
 ```
+
+The following line is added to _routes/breadcrumbs/backend/backend.php_:
+
+```
+require **DIR**.'/example.php';
+```
+
+If you delete the _routes/breadcrumbs/backend/example.php_ file created by this command, don't forget to delete this line or your whole project will crash.
 
 ### Views
 

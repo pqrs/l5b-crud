@@ -29,6 +29,32 @@ php artisan l5b:crud example
 
 Where _example_ is the name you want for your model (routes, views, controllers,...).
 
+Then run the created migration:
+
+```
+php artisan migrate
+```
+
+In your browser open:
+
+```
+https://YOUR_SITE_/admin/examples
+```
+
+**et voilà!**
+
+## Suggestions
+
+You can add this piece of code to _/resources/views/backend/includes/sidebar.blade.php_ to have a menu item for your new CRUD views:
+
+```
+<li class="nav-item">
+    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/examples*')) }}" href="{{ route('admin.examples.index') }}">
+        <i class="nav-icon icon-speedometer"></i> @lang('menus.backend.sidebar.examples')
+    </a>
+</li>
+```
+
 ## Files created
 
 ### Model

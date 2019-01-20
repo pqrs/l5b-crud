@@ -1,6 +1,6 @@
 # CRUD artisan command for rappasoft/laravel-5-boilerplate
 
-Creates a Model, Controller (with validation Requests), Migration, Routes, Breadcrumbs and CRUD Views for the given name ready to work with in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
+Creates a Model, Controller (with Repository and validation Requests), Migration, Routes, Breadcrumbs and CRUD Views for the given name ready to work in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
 
 ## Requires
 
@@ -13,7 +13,7 @@ It has been tested with Laravel 5.7.
 
 ### Method 1
 
-Copy _l5bCrud.php_ and _l5bStub.php_ and the _Stubs_ folder with all its contents into your _/app/Commands/_ folder.
+Copy _l5bCrud.php_ and _l5bStub.php_ and the _Stubs_ folder with all its contents into your _/app/Commands_ folder.
 
 ### Method 2
 
@@ -27,7 +27,7 @@ In your Laravel project root folder:
 php artisan l5b:crud example
 ```
 
-Where _example_ is the name you want for your model (routes, views, controllers,...). I've tried to follow naming best practices and it uses plural or singular names and lower or uppercase where needed.
+Where _example_ is the name you want for your model (routes, views, controllers,...). I've tried to follow best naming practices and it uses plural or singular names and lower or uppercase where needed.
 
 Parameters _example_, _Example_, _examples_ or _EXAMPLES_ all give the same results.
 
@@ -37,7 +37,7 @@ Then run the created migration:
 php artisan migrate
 ```
 
-Note: out of the box, the table comes only with a _title_ text field, besides the _id_, _deleted_at_, _created_at_ and _updated_at_. Edit your newly created migration file to add any other you may need befor run the migrate command.
+Note: out of the box, the table comes only with a _title_ text field, besides the _id_, _deleted_at_, _created_at_ and _updated_at_. Edit your newly created migration file to add any other you may need before runnning the migrate command.
 
 In your browser open:
 
@@ -47,25 +47,21 @@ https://YOUR_SITE/admin/examples
 
 **...et voilà! :)**
 
-## Suggestions
+## Include a menu item
 
-You can add this piece of code to _/resources/views/backend/includes/sidebar.blade.php_ to have a menu item for your new CRUD views:
+A file named _sidebar-examples.blade.php_ is created in the folder _/resources/views/backend/includes_. It contains the html code for a menu item to access your recently created views. You can show it in your sidebar by including the following line in _/resources/views/backend/includes/sidebar.blade.php_ wherever you want it to appear:
 
 ```
-<li class="nav-item">
-    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/examples*')) }}" href="{{ route('admin.examples.index') }}">
-        <i class="nav-icon icon-whatever"></i> @lang('menus.backend.sidebar.examples')
-    </a>
-</li>
+    @include('backend.includes.sidebar-examples')
 ```
 
 ## Strings
 
-These are the _labels.php_, _menus.php_ and _validation.php_ English strings needed, copy them into the files in _/resources/lang/en/_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
+These are the _labels.php_, _menus.php_ and _validation.php_ English strings needed, copy them into the files in _/resources/lang/en_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
 
 TODO: generate a file with your choosen name ready to copy&paste.
 
-_labels.php_ under **'backend'**:
+**labels.php** under _'backend'_:
 
 ```
         'examples' => [
@@ -99,7 +95,7 @@ _labels.php_ under **'backend'**:
         ],
 ```
 
-_menus.php_ under **'backend'**
+**menus.php** under _'backend'_
 
 ```
         'examples' => [
@@ -112,18 +108,36 @@ _menus.php_ under **'backend'**
         ],
 ```
 
-_menus.php_ under **'backend' => 'sidebar'**
+**menus.php** under _'backend' => 'sidebar'_
 
 ```
     'examples'  => 'Examples',
 ```
 
-_validation.php_ under **'attributes' => 'backend'**
+**validation.php** under _'attributes' => 'backend'_
 
 ```
             'examples' => [
                 'title'            => 'Title',
             ],
+```
+
+**buttons.php** under _'backend'_
+
+```
+        'examples' => [
+            'restore' => 'Restore Example'
+            'delete_permanently'    => 'Permanently delete Example'
+        ],
+```
+
+**exceptions.php** under _'backend'_
+
+```
+        'examples' => [
+            'cant_restore'          => 'This Example is not deleted so it can not be restored.',
+            'delete_first'          => 'This Example must be deleted first before it can be destroyed permanently.',
+        ]
 ```
 
 ## Files created
@@ -150,14 +164,23 @@ app/Http/Controllers/Backend/ExampleController.php
 
 It contains the CRUD methods: _index_, _create_, _store_, _show_, _edit_, _update_, _destroy_, _delete_, _restore_ and _deleted_.
 
+### Repository
+
+```
+app/Repositories/Backend/ExampleRepository.php
+```
+
+Contains database logic.
+
 ### Requests
 
 ```
+app/Http/Requests/Backend/ManageExampleRequest.php
 app/Http/Requests/Backend/StoreExampleRequest.php
 app/Http/Requests/Backend/UpdateExampleRequest.php
 ```
 
-Validation store and update Requests.
+Validation manage, store and update Requests.
 
 ### Migrations
 
@@ -204,6 +227,14 @@ resources/views/backend/example/includes/header-buttons.blade.php
 
 If you add more fields to your datatable, you'll have to edit _show.blade.php_, _create.blade.php_ and _edit.blade.php_ to suit your needs.
 
+### Menu item
+
+```
+_sidebar-examples.blade.php_
+```
+
+HTML code for the menu item for your sidebar.
+
 ## License
 
 This repository is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
@@ -215,3 +246,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+**Laravel** Copyright © 2019 Taylor Otwell
+**Laravel 5 Boilerplate** Copyright © 2019 Anthony Rappa <rappa819@gmail.com>

@@ -1,0 +1,80 @@
+'labels' => [
+    'backend' => [
+        'examples' => [
+            'management'    => 'Example Management',
+            'active'        => 'Active Examples',
+            'view'          => 'View Example',
+            'edit'          => 'Edit Example',
+            'create'        => 'Create Example',
+            'create_new'    => 'Create New Example',
+            'table'         => [
+                'title'         => 'Title',
+                'created'       => 'Created',
+                'last_updated'  => 'Last Updated',
+                'deleted'       => 'Deleted',
+                'actions'       => 'Actions',
+                'tab_title'     => 'Overview',
+                'total'         => 'example total|examples total',
+            ],
+
+            'tabs' => [
+                'title' => 'Overview',
+                'content' => [
+                    'overview'  => [
+                        'title'         => 'Title',
+                        'created_at'    => 'Created',
+                        'last_updated'  => 'Last Updated',
+                    ],
+                ],
+            ],
+
+        ],
+    ],
+],
+
+'menus' => [
+    'backend' => [
+        'examples' => [
+            'main'            => 'Examples',
+            'all'             => 'All Examples',
+            'create'          => 'Create Example',
+            'deleted'         => 'Deleted Examples',
+            'view'            => 'View Example',
+            'edit'            => 'Edit Example',
+        ],
+    ],
+    'sidebar' => [
+        'examples'  => 'Examples',
+    ],
+],
+
+'validation' => [
+    'backend' => [
+        'examples' => [
+            'title'            => 'Title',
+        ],
+    ],
+
+],
+
+
+'buttons' => [
+    'backend' => [
+        'examples' => [
+            'main'            => 'Examples',
+            'all'             => 'All Examples',
+            'create'          => 'Create Example',
+            'deleted'         => 'Deleted Examples',
+            'view'            => 'View Example',
+            'edit'            => 'Edit Example',
+        ],
+    ],
+],
+
+'exceptions' => [
+    'examples' => [
+        'cant_restore'          => 'This Example is not deleted so it can not be restored.',
+        'delete_first'          => 'This Example must be deleted first before it can be destroyed permanently.',
+    ]
+],
+

@@ -68,17 +68,42 @@ class L5bCrud extends Command
         Artisan::call(
             'l5b:stub',
             [
-                'name'          => ucfirst($name) . "Controller",
-                'stub'          => '/Console/Commands/Stubs/make-controller.stub',
-                'namespace'     => '\Http\Controllers\Backend',
-                'array'         => str_plural($name),
-                'controller'    => ucfirst($name) . "Controller",
-                'label'         => str_plural($name),
-                'model'         => ucfirst($name),
-                'request'       => ucfirst($name) . "Request",
-                'route'         => str_plural($name),
-                'variable'      => $name,
-                'view'          => $name,
+                'name'                  => ucfirst($name) . "Controller",
+                'stub'                  => '/Console/Commands/Stubs/make-controller.stub',
+                'namespace'             => '\Http\Controllers\Backend',
+                'array'                 => str_plural($name),
+                'controller'            => ucfirst($name) . "Controller",
+                'label'                 => str_plural($name),
+                'model'                 => ucfirst($name),
+                'repository'            => ucfirst($name) . "Repository",
+                'repositoryVariable'    => $name . "Repository",
+                'request'               => ucfirst($name) . "Request",
+                'route'                 => str_plural($name),
+                'variable'              => $name,
+                'view'                  => $name,
+                ]);
+
+        // Create Repository "ExampleRepository.php"
+        Artisan::call(
+            'l5b:stub',
+            [
+                'name'                  => ucfirst($name) . "Repository",
+                'stub'                  => '/Console/Commands/Stubs/make-repository.stub',
+                'namespace'             => '\Repositories\Backend',
+                'model'                 => ucfirst($name),
+                'repository'            => ucfirst($name) . "Repository",
+                'variable'              => $name,
+                'label'                 => str_plural($name),
+                ]);
+
+        // Create Validation Request "ManageExampleController.php"
+        Artisan::call(
+            'l5b:stub',
+            [
+                'name'      => "Manage" . ucfirst($name) . "Request",
+                'stub'      => '/Console/Commands/Stubs/make-manage-request.stub',
+                'namespace' => '\Http\Requests\Backend',
+                'model'     => ucfirst($name),
                 ]);
 
         // Create Validation Request "StoreExampleController.php"
@@ -123,7 +148,9 @@ class L5bCrud extends Command
                 'stub'          => '/Console/Commands/Stubs/make-routes.stub',
                 'namespace'     => '\..\routes\backend',
                 'controller'    => ucfirst($name) . "Controller",
+                'model'         => ucfirst($name),
                 'route'         => str_plural($name),
+                'variable'      => $name,
                 ]);
 
         // Create Breadcrumbs "examples.php"

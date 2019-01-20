@@ -1,0 +1,141 @@
+<?php
+
+namespace App\Repositories\Backend;
+
+use App\Models\DummyModel;
+use Illuminate\Support\Facades\DB;
+use App\Exceptions\GeneralException;
+use App\Repositories\BaseRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+/**
+ * Class DummyRepository.
+ */
+class DummyRepository extends BaseRepository
+{
+    /**
+     * @return string
+     */
+    public function model()
+    {
+        return DummyModel::class;
+    }
+
+    /**
+     * @param int    $paged
+     * @param string $orderBy
+     * @param string $sort
+     *
+     * @return mixed
+     */
+    public function getActivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    {
+        return $this->model
+            ->orderBy($orderBy, $sort)
+            ->paginate($paged);
+    }
+
+    /**
+     * @param int    $paged
+     * @param string $orderBy
+     * @param string $sort
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getDeletedPaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    {
+        return $this->model
+            ->onlyTrashed()
+            ->orderBy($orderBy, $sort)
+            ->paginate($paged);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return DummyModel
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function create(array $data) : DummyModel
+    {
+        return DB::transaction(function () use ($data) {
+            $DummyVariable = parent::create([
+                'title' => $data['title'],
+            ]);
+
+            if ($DummyVariable) {
+                return $DummyVariable;
+            }
+
+            throw new GeneralException(__('exceptions.backend.DummyLabel.create_error'));
+        });
+    }
+
+    /**
+     * @param DummyModel  $DummyVariable
+     * @param array     $data
+     *
+     * @return DummyModel
+     * @throws GeneralException
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function update(DummyModel $DummyVariable, array $data) : DummyModel
+    {
+        return DB::transaction(function () use ($DummyVariable, $data) {
+            if ($DummyVariable->update([
+                'title' => $data['title'],
+            ])) {
+
+                return $DummyVariable;
+            }
+
+            throw new GeneralException(__('exceptions.backend.DummyLabel.update_error'));
+        });
+    }
+
+    /**
+     * @param DummyModel $DummyVariable
+     *
+     * @return DummyModel
+     * @throws GeneralException
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function forceDelete(DummyModel $DummyVariable) : DummyModel
+    {
+        if (is_null($DummyVariable->deleted_at)) {
+            throw new GeneralException(__('exceptions.backend.DummyLabel.delete_first'));
+        }
+
+        return DB::transaction(function () use ($DummyVariable) {
+            if ($DummyVariable->forceDelete()) {
+                return $DummyVariable;
+            }
+
+            throw new GeneralException(__('exceptions.backend.DummyLabel.delete_error'));
+        });
+    }
+
+    /**
+     * Restore the specified soft deleted resource.
+     *
+     * @param DummyModel $DummyVariable
+     *
+     * @return DummyModel
+     * @throws GeneralException
+     */
+    public function restore(DummyModel $DummyVariable) : DummyModel
+    {
+        if (is_null($DummyVariable->deleted_at)) {
+            throw new GeneralException(__('exceptions.backend.DummyLabel.cant_restore'));
+        }
+
+        if ($DummyVariable->restore()) {
+            return $DummyVariable;
+        }
+
+        throw new GeneralException(__('exceptions.backend.DummyLabel.restore_error'));
+    }
+}

@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    {{ __('labels.backend.DummyLabel.management') }} <small class="text-muted">{{ __('labels.backend.DummyLabel.active') }}</small>
+                    {{ __('labels.backend.DummyLabel.deleted') }} <small class="text-muted">{{ __('labels.backend.DummyLabel.active') }}</small>
                 </h4>
             </div><!--col-->
 
@@ -36,7 +36,7 @@
                         <tbody>
                         @foreach($DummyArray as $DummyVariable)
                             <tr>
-                                <td class="align-middle"><a href="/DummyRoute/{{ $DummyVariable->slug }}">{{ $DummyVariable->title }}</a></td>
+                                <td class="align-middle"><a href="/DummyRoute/{{ $DummyVariable->id }}">{{ $DummyVariable->title }}</a></td>
                                 <td class="align-middle">{!! $DummyVariable->created_at !!}</td>
                                 <td class="align-middle">{{ $DummyVariable->deleted_at->diffForHumans() }}</td>
                                 <td class="align-middle">{!! $DummyVariable->trashed_buttons !!}</td>

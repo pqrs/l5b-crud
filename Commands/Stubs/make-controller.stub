@@ -4,31 +4,52 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Exceptions\GeneralException;
 
 use App\Models\DummyModel;
+use App\Repositories\Backend\DummyRepository;
+use App\Http\Requests\Backend\ManageDummyRequest;
 use App\Http\Requests\Backend\StoreDummyRequest;
 use App\Http\Requests\Backend\UpdateDummyRequest;
 
 class DummyController extends Controller
 {
     /**
+     * @var DummyRepository
+     */
+    protected $DummyRepoVariable;
+
+    /**
+     * DummyController constructor.
+     *
+     * @param DummyRepository $DummyRepoVariable
+     */
+    public function __construct(DummyRepoVariable $DummyRepoVariable)
+    {
+        $this->DummyRepoVariable = $DummyRepoVariable;
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ManageDummyRequest $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(ManageDummyRequest $request)
     {
-        $DummyArray = DummyModel::paginate(25);
-
-        return view('backend.DummyView.index', compact('DummyArray'));
+        return view('backend.DummyView.index')
+            ->withDummyArray($this->DummyRepoVariable->getActivePaginated(25, 'id', 'asc'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ManageDummyRequest    $request
+     *
+     * @return mixed
      */
-    public function create()
+    public function create(ManageDummyRequest $request)
     {
         return view('backend.DummyView.create');
     }
@@ -36,118 +57,127 @@ class DummyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreDummyRequest $request
+     *
+     * @return mixed
+     * @throws \Throwable
      */
     public function store(StoreDummyRequest $request)
     {
-        $DummyVariable = new DummyModel;
+        $this->DummyRepoVariable->create($request->only(
+            'title'
+        ));
 
-        $DummyVariable->title = $request['title'];
-
-        $DummyVariable->save();
-
-        return redirect()->route('admin.DummyVariables.index')->withFlashSuccess(__('alerts.backend.DummyView.created'));
+        return redirect()->route('admin.DummyRoute.index')
+            ->withFlashSuccess(__('alerts.backend.DummyLabel.created'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  $id
-     * @return \Illuminate\Http\Response
+     * @param ManageDummyRequest  $request
+     * @param DummyModel               $DummyVariable
+     *
+     * @return mixed
      */
-    public function show($id)
+    public function show(ManageDummyRequest $request, DummyModel $DummyVariable)
     {
-        $DummyVariable = DummyModel::findOrFail($id);
-
-        return view('backend.DummyView.show', compact('DummyVariable'));
+        return view('backend.DummyView.show')->withDummyModel($DummyVariable);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  $id
-     * @return \Illuminate\Http\Response
+     * @param ManageDummyRequest $request
+     * @param DummyModel              $DummyVariable
+     *
+     * @return mixed
      */
-    public function edit($id)
+    public function edit(ManageDummyRequest $request, DummyModel $DummyVariable)
     {
-        $DummyVariable = DummyModel::find($id);
-
-        return view('backend.DummyView.edit', compact('DummyVariable'));
+        return view('backend.DummyView.edit')->withDummyModel($DummyVariable);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateDummyRequest  $request
+     * @param DummyModel               $DummyVariable
+     *
+     * @return mixed
+     * @throws \App\Exceptions\GeneralException
+     * @throws \Throwable
      */
-    public function update(UpdateDummyRequest $request, $id)
+    public function update(UpdateDummyRequest $request, DummyModel $DummyVariable)
     {
-        $DummyVariable = DummyModel::findOrFail($id);
+        $this->DummyRepoVariable->update($DummyVariable, $request->only(
+            'title'
+        ));
 
-        $DummyVariable->title     = $request['title'];
-
-        $DummyVariable->save();
-
-        return redirect()->route('admin.DummyRoute.show', $id)->withFlashSuccess(__('alerts.backend.DummyView.updated'));
+        return redirect()->route('admin.DummyRoute.index')
+            ->withFlashSuccess(__('alerts.DummyLabel.updated'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DummyName  $DummyVariable
-     * @return \Illuminate\Http\Response
+     * @param ManageDummyRequest $request
+     * @param DummyModel              $DummyVariable
+     *
+     * @return mixed
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(ManageDummyRequest $request, DummyModel $DummyVariable)
     {
-        $DummyVariable = DummyModel::findOrFail($id);
+        $this->DummyRepoVariable->deleteById($DummyVariable->id);
 
-        $DummyVariable->delete();
-
-        return redirect()->route('admin.DummyRoute.index')->withFlashSuccess(__('alerts.backend.DummyLabel.deleted'));
+        return redirect()->route('admin.DummyRoute.deleted')
+            ->withFlashSuccess(__('alerts.DummyLabel.deleted'));
     }
 
     /**
      * Permanently remove the specified resource from storage.
      *
-     * @param  \App\Models\DummyName  $DummyVariable
-     * @return \Illuminate\Http\Response
+     * @param ManageDummyRequest $request
+     * @param DummyModel              $deletedDummyModel
+     *
+     * @return mixed
+     * @throws \App\Exceptions\GeneralException
+     * @throws \Throwable
      */
-    public function delete($id)
+    public function delete(ManageDummyRequest $request, DummyModel $deletedDummyModel)
     {
-        $DummyVariable = DummyModel::withTrashed()->findOrFail($id);
+        $this->DummyRepoVariable->forceDelete($deletedDummyModel);
 
-        $DummyVariable->forceDelete();
-
-        return redirect()->route('admin.DummyRoute.index')->withFlashSuccess(__('alerts.backend.DummyLabel.deleted'));
+        return redirect()->route('admin.DummyRoute.deleted')
+            ->withFlashSuccess(__('alerts.backend.DummyLabel.deleted_permanently'));
     }
 
     /**
-     * Restore the specified soft deleted resource.
+     * @param ManageDummyRequest $request
+     * @param DummyModel              $deletedDummyModel
      *
-     * @param  \App\Models\DummyName  $DummyVariable
-     * @return \Illuminate\Http\Response
+     * @return mixed
+     * @throws \App\Exceptions\GeneralException
      */
-    public function restore($id)
+    public function restore(ManageDummyRequest $request, DummyModel $deletedDummyModel)
     {
-        $DummyVariable = DummyModel::withTrashed()->findOrFail($id);
+        $this->DummyRepoVariable->restore($deletedDummyModel);
 
-        $DummyVariable->restore();
-
-        return redirect()->route('admin.DummyRoute.index')->withFlashSuccess(__('alerts.backend.DummyLabel.deleted'));
+        return redirect()->route('admin.DummyRoute.index')
+            ->withFlashSuccess(__('alerts.backend.DummyLabel.restored'));
     }
 
     /**
      * Display a listing of deleted items of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ManageDummyRequest $request
+     *
+     * @return mixed
      */
-    public function deleted()
+    public function deleted(ManageDummyRequest $request)
     {
-        $DummyArray = DummyModel::onlyTrashed()->paginate(25);
-
-        return view('backend.DummyView.deleted', compact('DummyArray'));
+        return view('backend.DummyView.deleted')
+            ->withDummyArray($this->DummyRepoVariable->getDeletedPaginated(25, 'id', 'asc'));
     }
 }

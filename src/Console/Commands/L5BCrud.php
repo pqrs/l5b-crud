@@ -42,7 +42,6 @@ class L5BCrud extends Command
     {
         $name = strtolower(str_singular($this->argument('name')));
 
-        echo __DIR__.'/Stubs';
         // Create Model "ExampleModel.php"
         Artisan::call(
             'l5b:stub',

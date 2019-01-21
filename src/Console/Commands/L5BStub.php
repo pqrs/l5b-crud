@@ -85,7 +85,7 @@ class L5BStub extends GeneratorCommand
 	*/
 	protected function getStub()
 	{
-		return app_path() . $this->argument('stub');
+		return $this->argument('stub');
 	}
 
 	/**

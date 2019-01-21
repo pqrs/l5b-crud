@@ -13,11 +13,13 @@ It has been tested with Laravel 5.7.
 
 ### Method 1
 
-Copy _l5bCrud.php_ and _l5bStub.php_ and the _Stubs_ folder with all its contents into your _/app/Commands_ folder.
+```
+composer require pqrs/l5b-crud
+```
 
 ### Method 2
 
-Packagist Composer repository (TODO)
+Copy _L5BCrud.php_ and _L5BStub.php_ and the _Stubs_ folder with all its contents into your _/app/Console/Commands_ folder.
 
 ## Run
 

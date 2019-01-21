@@ -8,6 +8,6 @@
             "email": "alvaro@pqrs.es"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {}
 }

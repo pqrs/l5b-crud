@@ -259,18 +259,15 @@ class L5BCrud extends Command
                 'view'      => $name,
                 ]);
 
-        // Create View "example/includes/header-buttons.blade.php"
+        // Create View "example/includes/sidebar-examples.blade.php"
         Artisan::call(
             'l5b:stub',
             [
-                'name'      => '/includes/header-buttons.blade',
-                'stub'      => __DIR__.'/Stubs/make-views-header-buttons.stub',
+                'name'      => '/includes/sidebar-'. str_plural($name) . '.blade',
+                'stub'      => __DIR__.'/Stubs/make-views-sidebar.stub',
                 'namespace' => '\..\resources\views\backend' . '\\' . $name,
                 'label'     => str_plural($name),
-                'array'     => str_plural($name),
                 'route'     => str_plural($name),
-                'variable'  => $name,
-                'view'      => $name,
                 ]);
     }
 }

@@ -45,10 +45,10 @@ https://YOUR_SITE/admin/examples
 
 ## Include a menu item
 
-A file named _sidebar-examples.blade.php_ is created in the folder _/resources/views/backend/includes_. It contains the html code for a menu item to access your recently created views. You can show it in your sidebar by including the following line in _/resources/views/backend/includes/sidebar.blade.php_ wherever you want it to appear:
+A file named _sidebar-examples.blade.php_ is created in the folder _/resources/views/backend/example/includes_. It contains the html code for a menu item to access your recently created views. You can show it in your sidebar by including the following line in _/resources/views/backend/includes/sidebar.blade.php_ wherever you want it to appear:
 
 ```
-    @include('backend.includes.sidebar-examples')
+    @include('backend.example.includes.sidebar-examples')
 ```
 
 ## Strings

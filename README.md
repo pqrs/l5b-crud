@@ -11,15 +11,9 @@ It has been tested with Laravel 5.7.
 
 ## Install
 
-### Method 1
-
 ```
 composer require pqrs/l5b-crud
 ```
-
-### Method 2
-
-Copy _L5BCrud.php_ and _L5BStub.php_ and the _Stubs_ folder with all its contents into your _/app/Console/Commands_ folder.
 
 ## Run
 
@@ -54,12 +48,12 @@ https://YOUR_SITE/admin/examples
 A file named _sidebar-examples.blade.php_ is created in the folder _/resources/views/backend/example/includes_. It contains the html code for a menu item to access your recently created views. You can show it in your sidebar by including the following line in _/resources/views/backend/includes/sidebar.blade.php_ wherever you want it to appear:
 
 ```
-    @include('backend.example.includes.sidebar-examples')
+@include('backend.example.includes.sidebar-examples')
 ```
 
-## Strings
+## Language lines
 
-Following are the _labels.php_, _menus.php_ and _validation.php_ English strings needed, copy them into the files in _/resources/lang/en_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
+Following are the _labels.php_, _menus.php_ and _validation.php_ English language lines needed, copy them into the files in _/resources/lang/en_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
 
 TODO: generate a file with your choosen name ready to copy&paste.
 

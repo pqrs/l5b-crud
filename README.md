@@ -13,6 +13,12 @@ It has been tested with Laravel 5.7.
 
 ### Method 1
 
+```
+composer require pqrs/l5b-crud
+```
+
+### Method 2
+
 Copy _L5BCrud.php_ and _L5BStub.php_ and the _Stubs_ folder with all its contents into your _/app/Console/Commands_ folder.
 
 ## Run
@@ -53,7 +59,7 @@ A file named _sidebar-examples.blade.php_ is created in the folder _/resources/v
 
 ## Strings
 
-These are the _labels.php_, _menus.php_ and _validation.php_ English strings needed, copy them into the files in _/resources/lang/en_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
+Following are the _labels.php_, _menus.php_ and _validation.php_ English strings needed, copy them into the files in _/resources/lang/en_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
 
 TODO: generate a file with your choosen name ready to copy&paste.
 

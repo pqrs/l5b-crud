@@ -13,7 +13,8 @@
   "autoload": {
     "psr-4": {
       "pqrs\\L5BCrud\\": "src/"
-    },
+    }
+  },
   "extra": {
     "laravel": {
       "providers": [

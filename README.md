@@ -13,12 +13,6 @@ It has been tested with Laravel 5.7.
 
 ### Method 1
 
-```
-composer require pqrs/l5b-crud
-```
-
-### Method 2
-
 Copy _L5BCrud.php_ and _L5BStub.php_ and the _Stubs_ folder with all its contents into your _/app/Console/Commands_ folder.
 
 ## Run

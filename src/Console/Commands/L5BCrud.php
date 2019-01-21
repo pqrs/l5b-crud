@@ -42,12 +42,13 @@ class L5BCrud extends Command
     {
         $name = strtolower(str_singular($this->argument('name')));
 
+        echo __DIR__.'/Stubs';
         // Create Model "ExampleModel.php"
         Artisan::call(
             'l5b:stub',
             [
                 'name'              => ucfirst($name),                  // Example
-                'stub'              => '/Console/Commands/Stubs/make-model.stub',
+                'stub'              => __DIR__.'/Stubs/make-model.stub',
                 'namespace'         => '\Models',
                 'attribute'         => ucfirst($name) . "Attribute",    // ExampleAttribute
                 'model'             => ucfirst($name),                  // Example
@@ -58,7 +59,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'              => ucfirst($name) . "Attribute",    // ExampleAttribute
-                'stub'              => '/Console/Commands/Stubs/make-attribute.stub',
+                'stub'              => __DIR__.'/Stubs/make-attribute.stub',
                 'namespace'         => '\Models\Traits\Attribute',
                 'attribute'         => ucfirst($name) . "Attribute",    // ExampleAttribute
                 'route'             => str_plural($name),               // examples
@@ -70,7 +71,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'                  => ucfirst($name) . "Controller",
-                'stub'                  => '/Console/Commands/Stubs/make-controller.stub',
+                'stub'                  => __DIR__.'/Stubs/make-controller.stub',
                 'namespace'             => '\Http\Controllers\Backend',
                 'array'                 => str_plural($name),
                 'controller'            => ucfirst($name) . "Controller",
@@ -89,7 +90,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'                  => ucfirst($name) . "Repository",
-                'stub'                  => '/Console/Commands/Stubs/make-repository.stub',
+                'stub'                  => __DIR__.'/Stubs/make-repository.stub',
                 'namespace'             => '\Repositories\Backend',
                 'model'                 => ucfirst($name),
                 'repository'            => ucfirst($name) . "Repository",
@@ -102,7 +103,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => "Manage" . ucfirst($name) . "Request",
-                'stub'      => '/Console/Commands/Stubs/make-manage-request.stub',
+                'stub'      => __DIR__.'/Stubs/make-manage-request.stub',
                 'namespace' => '\Http\Requests\Backend',
                 'model'     => ucfirst($name),
                 ]);
@@ -112,7 +113,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => "Store" . ucfirst($name) . "Request",
-                'stub'      => '/Console/Commands/Stubs/make-store-request.stub',
+                'stub'      => __DIR__.'/Stubs/make-store-request.stub',
                 'namespace' => '\Http\Requests\Backend',
                 'model'     => ucfirst($name),
                 ]);
@@ -122,7 +123,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => "Update" . ucfirst($name) . "Request",
-                'stub'      => '/Console/Commands/Stubs/make-update-request.stub',
+                'stub'      => __DIR__.'/Stubs/make-update-request.stub',
                 'namespace' => '\Http\Requests\Backend',
                 'model'     => ucfirst($name),
                 ]);
@@ -132,7 +133,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => date('Y_m_d_His_') . "create_" . str_plural($name)."_table",
-                'stub'      => '/Console/Commands/Stubs/make-migration.stub',
+                'stub'      => __DIR__.'/Stubs/make-migration.stub',
                 'namespace' => '\..\database\migrations',
                 'class'     => "Create" . ucfirst(str_plural($name)) . "Table",
                 'table'     => str_plural($name),
@@ -146,7 +147,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'          => str_plural($name),
-                'stub'          => '/Console/Commands/Stubs/make-routes.stub',
+                'stub'          => __DIR__.'/Stubs/make-routes.stub',
                 'namespace'     => '\..\routes\backend',
                 'controller'    => ucfirst($name) . "Controller",
                 'model'         => ucfirst($name),
@@ -159,7 +160,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'          => $name,
-                'stub'          => '/Console/Commands/Stubs/make-breadcrumbs.stub',
+                'stub'          => __DIR__.'/Stubs/make-breadcrumbs.stub',
                 'namespace'     => '\..\routes\breadcrumbs\backend',
                 'route'         => str_plural($name),
                 ]);
@@ -180,7 +181,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => 'index.blade',
-                'stub'      => '/Console/Commands/Stubs/make-views-index.stub',
+                'stub'      => __DIR__.'/Stubs/make-views-index.stub',
                 'namespace' => '\..\resources\views\backend' . '\\' . $name,
                 'label'     => str_plural($name),
                 'array'     => str_plural($name),
@@ -194,7 +195,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => 'create.blade',
-                'stub'      => '/Console/Commands/Stubs/make-views-create.stub',
+                'stub'      => __DIR__.'/Stubs/make-views-create.stub',
                 'namespace' => '\..\resources\views\backend' . '\\' . $name,
                 'label'     => str_plural($name),
                 'array'     => str_plural($name),
@@ -208,7 +209,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => 'edit.blade',
-                'stub'      => '/Console/Commands/Stubs/make-views-edit.stub',
+                'stub'      => __DIR__.'/Stubs/make-views-edit.stub',
                 'namespace' => '\..\resources\views\backend' . '\\' . $name,
                 'label'     => str_plural($name),
                 'array'     => str_plural($name),
@@ -222,7 +223,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => 'show.blade',
-                'stub'      => '/Console/Commands/Stubs/make-views-show.stub',
+                'stub'      => __DIR__.'/Stubs/make-views-show.stub',
                 'namespace' => '\..\resources\views\backend' . '\\' . $name,
                 'label'     => str_plural($name),
                 'array'     => str_plural($name),
@@ -236,7 +237,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => 'deleted.blade',
-                'stub'      => '/Console/Commands/Stubs/make-views-deleted.stub',
+                'stub'      => __DIR__.'/Stubs/make-views-deleted.stub',
                 'namespace' => '\..\resources\views\backend' . '\\' . $name,
                 'label'     => str_plural($name),
                 'array'     => str_plural($name),
@@ -250,7 +251,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => '/includes/breadcrumb-links.blade',
-                'stub'      => '/Console/Commands/Stubs/make-views-breadcrumb-links.stub',
+                'stub'      => __DIR__.'/Stubs/make-views-breadcrumb-links.stub',
                 'namespace' => '\..\resources\views\backend' . '\\' . $name,
                 'label'     => str_plural($name),
                 'array'     => str_plural($name),
@@ -264,7 +265,7 @@ class L5BCrud extends Command
             'l5b:stub',
             [
                 'name'      => '/includes/header-buttons.blade',
-                'stub'      => '/Console/Commands/Stubs/make-views-header-buttons.stub',
+                'stub'      => __DIR__.'/Stubs/make-views-header-buttons.stub',
                 'namespace' => '\..\resources\views\backend' . '\\' . $name,
                 'label'     => str_plural($name),
                 'array'     => str_plural($name),

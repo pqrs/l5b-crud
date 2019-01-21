@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Console\Commands;
+namespace pqrs\L5BCrud\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
-class L5bStub extends GeneratorCommand
+class L5BStub extends GeneratorCommand
 {
 	/**
 	* The name and signature of the console command.
@@ -19,7 +19,7 @@ class L5bStub extends GeneratorCommand
 	*
 	* @var string
 	*/
-	protected $description = 'Create crud views';
+	protected $description = 'Don\'t use this command. Run l5b:crud {name} instead';
 
 	/**
 	* The type of class being generated.

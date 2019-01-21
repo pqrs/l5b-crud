@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Console\Commands;
+namespace pqrs\L5BCrud\Console\Commands;
+
 use Symfony\Component\Console\Input\InputArgument;
 
 use Artisan;
 use Illuminate\Console\Command;
 
-class L5bCrud extends Command
+class L5BCrud extends Command
 {
     /**
     * The name and signature of the console command.
@@ -20,7 +21,7 @@ class L5bCrud extends Command
     *
     * @var string
     */
-    protected $description = 'Full process';
+    protected $description = 'Create a complete CRUD structure for Laravel 5 Boilerplate Backend';
 
     /**
     * Create a new command instance.

@@ -64,80 +64,80 @@ TODO: generate a file with your choosen name ready to copy&paste.
 **labels.php** under _'backend'_:
 
 ```
-        'examples' => [
-            'management'    => 'Example Management',
-            'active'        => 'Active Examples',
-            'view'          => 'View Example',
-            'edit'          => 'Edit Example',
-            'create'        => 'Create Example',
-            'create_new'    => 'Create New Example',
-            'table'         => [
+'examples' => [
+    'management'    => 'Example Management',
+    'active'        => 'Active Examples',
+    'view'          => 'View Example',
+    'edit'          => 'Edit Example',
+    'create'        => 'Create Example',
+    'create_new'    => 'Create New Example',
+    'table'         => [
+        'title'         => 'Title',
+        'created'       => 'Created',
+        'last_updated'  => 'Last Updated',
+        'deleted'       => 'Deleted',
+        'actions'       => 'Actions',
+        'tab_title'     => 'Overview',
+        'total'         => 'example total|examples total',
+    ],
+
+    'tabs' => [
+        'title' => 'Overview',
+        'content' => [
+            'overview'  => [
                 'title'         => 'Title',
-                'created'       => 'Created',
+                'created_at'    => 'Created',
                 'last_updated'  => 'Last Updated',
-                'deleted'       => 'Deleted',
-                'actions'       => 'Actions',
-                'tab_title'     => 'Overview',
-                'total'         => 'example total|examples total',
             ],
-
-            'tabs' => [
-                'title' => 'Overview',
-                'content' => [
-                    'overview'  => [
-                        'title'         => 'Title',
-                        'created_at'    => 'Created',
-                        'last_updated'  => 'Last Updated',
-                    ],
-                ],
-            ],
-
         ],
+    ],
+
+],
 ```
 
 **menus.php** under _'backend'_
 
 ```
-        'examples' => [
-            'main'            => 'Examples',
-            'all'             => 'All Examples',
-            'create'          => 'Create Example',
-            'deleted'         => 'Deleted Examples',
-            'view'            => 'View Example',
-            'edit'            => 'Edit Example',
-        ],
+'examples' => [
+    'main'            => 'Examples',
+    'all'             => 'All Examples',
+    'create'          => 'Create Example',
+    'deleted'         => 'Deleted Examples',
+    'view'            => 'View Example',
+    'edit'            => 'Edit Example',
+],
 ```
 
 **menus.php** under _'backend' => 'sidebar'_
 
 ```
-    'examples'  => 'Examples',
+'examples'  => 'Examples',
 ```
 
 **validation.php** under _'attributes' => 'backend'_
 
 ```
-            'examples' => [
-                'title'            => 'Title',
-            ],
+'examples' => [
+    'title'            => 'Title',
+],
 ```
 
 **buttons.php** under _'backend'_
 
 ```
-        'examples' => [
-            'restore' => 'Restore Example'
-            'delete_permanently'    => 'Permanently delete Example'
-        ],
+'examples' => [
+    'restore' => 'Restore Example'
+    'delete_permanently'    => 'Permanently delete Example'
+],
 ```
 
 **exceptions.php** under _'backend'_
 
 ```
-        'examples' => [
-            'cant_restore'          => 'This Example is not deleted so it can not be restored.',
-            'delete_first'          => 'This Example must be deleted first before it can be destroyed permanently.',
-        ]
+'examples' => [
+    'cant_restore'          => 'This Example is not deleted so it can not be restored.',
+    'delete_first'          => 'This Example must be deleted first before it can be destroyed permanently.',
+]
 ```
 
 ## Files created
@@ -230,7 +230,7 @@ If you add more fields to your datatable, you'll have to edit _show.blade.php_, 
 ### Menu item
 
 ```
-_sidebar-examples.blade.php_
+sidebar-examples.blade.php
 ```
 
 HTML code for the menu item for your sidebar.
@@ -248,4 +248,5 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 **Laravel** Copyright © 2019 Taylor Otwell
+
 **Laravel 5 Boilerplate** Copyright © 2019 Anthony Rappa <rappa819@gmail.com>

@@ -24,7 +24,7 @@ class DummyController extends Controller
      *
      * @param DummyRepository $DummyRepoVariable
      */
-    public function __construct(DummyRepoVariable $DummyRepoVariable)
+    public function __construct(DummyRepository $DummyRepoVariable)
     {
         $this->DummyRepoVariable = $DummyRepoVariable;
     }

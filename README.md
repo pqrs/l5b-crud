@@ -2,6 +2,8 @@
 
 Creates a Model, Controller (with Repository and validation Requests), Migration, Routes, Breadcrumbs and CRUD Views for the given name ready to work in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
 
+It does not overwrite any files that may exist with the pre-stablished names. So, if you delete one of the files and run the command again, the deleted file will be created again and the rest will be ignored and will keep the changes you could have made.
+
 ## Requires
 
 - [Laravel 5](https://laravel.com)
@@ -23,7 +25,7 @@ In your Laravel project root folder:
 php artisan l5b:crud example
 ```
 
-Where _example_ is the name you want for your model (routes, views, controllers,...). I've tried to follow best naming practices and it uses plural or singular names and lower or uppercase where needed.
+Where _example_ is the name you want for your model (routes, views, controllers,...). I've tried to follow best naming practices and it uses plural or singular names and lower or uppercase where needed. You can also use camelCase or snake_case.
 
 Parameters _example_, _Example_, _examples_ or _EXAMPLES_ all give the same results.
 
@@ -33,8 +35,6 @@ Then run the created migration:
 php artisan migrate
 ```
 
-Note: out of the box, the table comes only with a _title_ text field, besides the _id_, _deleted_at_, _created_at_ and _updated_at_. Edit your newly created migration file to add any other you may need before runnning the migrate command.
-
 In your browser open:
 
 ```
@@ -42,6 +42,20 @@ https://YOUR_SITE/admin/examples
 ```
 
 **...et voilà! :)**
+
+Note: out of the box, the table comes only with a _title_ text field, besides the _id_, _deleted_at_, _created_at_ and _updated_at_. Edit your newly created migration file to add any other you may need before runnning the migrate command.
+
+## Options
+
+You can create all the files and run the migration by running the command with the option --migrate:
+
+```
+php artisan l5b:crud example --migrate
+
+or
+
+php artisan l5b:crud example -m
+```
 
 ## Include a menu item
 
@@ -55,7 +69,7 @@ A file named _sidebar-examples.blade.php_ is created in the folder _/resources/v
 
 Following are the _labels.php_, _menus.php_ and _validation.php_ English language lines needed, copy them into the files in _/resources/lang/en_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
 
-TODO: generate a file with your choosen name ready to copy&paste.
+TODO: generate a file with all the customized language lines ready to copy&paste.
 
 **labels.php** under _'backend'_:
 

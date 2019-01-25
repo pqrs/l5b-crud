@@ -136,8 +136,8 @@ TODO: generate a file with all the customized language lines ready to copy&paste
 
 ```
 'examples' => [
-    'restore' => 'Restore Example'
-    'delete_permanently'    => 'Permanently delete Example'
+    'restore' => 'Restore Example',
+    'delete_permanently'    => 'Permanently delete Example',
 ],
 ```
 

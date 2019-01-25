@@ -132,6 +132,18 @@ TODO: generate a file with all the customized language lines ready to copy&paste
 ],
 ```
 
+**alerts.php** under _'backend'_
+
+```
+'examples' => [
+    'created'                   => 'The example was successfully created.',
+    'updated'                   => 'The example was successfully updated.',
+    'deleted'                   => 'The example was successfully deleted.',
+    'restored'                  => 'The example was successfully restored.',
+    'deleted_permanently'       => 'The example was deleted permanently.',
+],
+```
+
 **buttons.php** under _'backend'_
 
 ```

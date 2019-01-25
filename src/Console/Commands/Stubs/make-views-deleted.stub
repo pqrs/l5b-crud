@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    {{ __('labels.backend.DummyLabel.deleted') }} <small class="text-muted">{{ __('labels.backend.DummyLabel.active') }}</small>
+                    {{ __('labels.backend.DummyLabel.management') }} <small class="text-muted">{{ __('labels.backend.DummyLabel.deleted') }}</small>
                 </h4>
             </div><!--col-->
 

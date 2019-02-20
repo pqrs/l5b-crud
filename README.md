@@ -47,7 +47,7 @@ Note: out of the box, the table comes only with a _title_ text field, besides th
 
 ## Options
 
-You can create all the files and run the migration by running the command with the option --migrate:
+You can create all the files and run the migration by running the command with the --migrate option:
 
 ```
 php artisan l5b:crud example --migrate
@@ -55,6 +55,16 @@ php artisan l5b:crud example --migrate
 or
 
 php artisan l5b:crud example -m
+```
+
+You may also specify the name of the default text field 'title' to whatever other you prefer with the --field option:
+
+```
+php artisan l5b:crud example --field:name
+
+or
+
+php artisan l5b:crud example -f:name
 ```
 
 ## Include a menu item
@@ -103,6 +113,8 @@ TODO: generate a file with all the customized language lines ready to copy&paste
     ],
 
 ],
+
+_Warning: If you have used the --field option, you should change tabs->content->overview->title to match the field name you have chosen.
 ```
 
 **menus.php** under _'backend'_
@@ -130,6 +142,8 @@ TODO: generate a file with all the customized language lines ready to copy&paste
 'examples' => [
     'title'            => 'Title',
 ],
+
+_Warning: If you have used the --field option, you should change 'title' to match the field name you have chosen.
 ```
 
 **alerts.php** under _'backend'_

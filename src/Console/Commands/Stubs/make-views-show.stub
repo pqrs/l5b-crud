@@ -33,8 +33,8 @@
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <tr>
-                                        <th>@lang('labels.backend.DummyLabel.tabs.content.overview.title')</th>
-                                        <td>{{ $DummyVariable->title }}</td>
+                                        <th>@lang('labels.backend.DummyLabel.tabs.content.overview.DummyField')</th>
+                                        <td>{{ $DummyVariable->DummyField }}</td>
                                     </tr>
                                 </table>
                             </div><!--table-responsive-->

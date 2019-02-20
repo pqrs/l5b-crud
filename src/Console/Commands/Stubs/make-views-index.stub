@@ -27,7 +27,7 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>@lang('labels.backend.DummyLabel.table.title')</th>
+                            <th>@lang('labels.backend.DummyLabel.table.DummyField')</th>
                             <th>@lang('labels.backend.DummyLabel.table.created')</th>
                             <th>@lang('labels.backend.DummyLabel.table.last_updated')</th>
                             <th>@lang('labels.backend.DummyLabel.table.actions')</th>
@@ -36,7 +36,7 @@
                         <tbody>
                         @foreach($DummyArray as $DummyVariable)
                             <tr>
-                                <td class="align-middle"><a href="/DummyRoute/{{ $DummyVariable->id }}">{{ $DummyVariable->title }}</a></td>
+                                <td class="align-middle"><a href="/DummyRoute/{{ $DummyVariable->id }}">{{ $DummyVariable->DummyField }}</a></td>
                                 <td class="align-middle">{!! $DummyVariable->created_at !!}</td>
                                 <td class="align-middle">{{ $DummyVariable->updated_at->diffForHumans() }}</td>
                                 <td class="align-middle">{!! $DummyVariable->action_buttons !!}</td>

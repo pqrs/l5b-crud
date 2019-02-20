@@ -14,7 +14,7 @@ class L5BCrud extends Command
     *
     * @var string
     */
-    protected $signature = 'l5b:crud {name} {--m|migrate}';
+    protected $signature = 'l5b:crud {name} {--m|migrate} {--f|field=title}';
 
     /**
     * The console command description.
@@ -96,12 +96,14 @@ class L5BCrud extends Command
             'stub'              => __DIR__ . '/Stubs/' . $stub,
             'namespace'         => '\Models',
             'attribute'         => ucfirst(camel_case($key)) . "Attribute",
+            'field'             => $this->option('field'),
             'model'             => ucfirst(camel_case($key)),
         ];
 
         Artisan::call('l5b:stub', $stubParams);
         $this->line('Model ' . $stubParams['name'] . Artisan::output());
     }
+
 
     protected function attribute($key, $name, $stub)
     {
@@ -126,6 +128,7 @@ class L5BCrud extends Command
             'namespace'             => '\Http\Controllers\Backend',
             'array'                 => camel_case(str_plural($key)),
             'controller'            => ucfirst(camel_case($key)) . "Controller",
+            'field'                 => $this->option('field'),
             'label'                 => str_plural($key),
             'model'                 => ucfirst(camel_case($key)),
             'repository'            => ucfirst(camel_case($key)) . "Repository",
@@ -145,6 +148,7 @@ class L5BCrud extends Command
         $stubParams = [
             'name'                  => $name,
             'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'field'                 => $this->option('field'),
             'namespace'             => '\Repositories\Backend',
             'model'                 => ucfirst(camel_case($key)),
             'repository'            => ucfirst(camel_case($key)) . "Repository",
@@ -161,6 +165,7 @@ class L5BCrud extends Command
         $stubParams = [
             'name'                  => $name,
             'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'field'                 => $this->option('field'),
             'namespace'             => '\Http\Requests\Backend',
             'model'                 => ucfirst(camel_case($key)),
         ];
@@ -174,6 +179,7 @@ class L5BCrud extends Command
         $stubParams = [
             'name'                  => $name,
             'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'field'                 => $this->option('field'),
             'namespace'             => '\..\database\migrations',
             'class'                 => "Create" . ucfirst(str_plural(camel_case($key))) . "Table",
             'table'                 => str_plural($key),
@@ -242,6 +248,7 @@ class L5BCrud extends Command
             'namespace'             => '\..\resources\views\backend' . '\\' . $key,
             'label'                 => str_plural($key),
             'array'                 => camel_case(str_plural($key)),
+            'field'                 => $this->option('field'),
             'route'                 => str_plural($key),
             'variable'              => camel_case($key),
             'view'                  => $key,

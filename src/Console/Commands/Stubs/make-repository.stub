@@ -61,7 +61,7 @@ class DummyRepository extends BaseRepository
     {
         return DB::transaction(function () use ($data) {
             $DummyVariable = parent::create([
-                'title' => $data['title'],
+                'DummyField' => $data['DummyField'],
             ]);
 
             if ($DummyVariable) {
@@ -85,7 +85,7 @@ class DummyRepository extends BaseRepository
     {
         return DB::transaction(function () use ($DummyVariable, $data) {
             if ($DummyVariable->update([
-                'title' => $data['title'],
+                'DummyField' => $data['DummyField'],
             ])) {
 
                 return $DummyVariable;

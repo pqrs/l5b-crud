@@ -28,7 +28,7 @@ class StoreDummyModelRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'     => ['required', 'max:191'],
+            'DummyField'     => ['required', 'max:191'],
         ];
     }
 
@@ -40,8 +40,8 @@ class StoreDummyModelRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required'    => 'The :attribute field is required.',
-            'title.max'         => 'The :attribute field must have less than :max characters',
+            'DummyField.required'    => 'The :attribute field is required.',
+            'DummyField.max'         => 'The :attribute field must have less than :max characters',
         ];
     }
 }

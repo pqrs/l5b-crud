@@ -65,7 +65,7 @@ class DummyController extends Controller
     public function store(StoreDummyRequest $request)
     {
         $this->DummyRepoVariable->create($request->only(
-            'title'
+            'DummyField'
         ));
 
         return redirect()->route('admin.DummyRoute.index')
@@ -111,7 +111,7 @@ class DummyController extends Controller
     public function update(UpdateDummyRequest $request, DummyModel $DummyVariable)
     {
         $this->DummyRepoVariable->update($DummyVariable, $request->only(
-            'title'
+            'DummyField'
         ));
 
         return redirect()->route('admin.DummyRoute.index')

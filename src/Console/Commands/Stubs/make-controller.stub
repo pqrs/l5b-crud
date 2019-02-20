@@ -115,7 +115,7 @@ class DummyController extends Controller
         ));
 
         return redirect()->route('admin.DummyRoute.index')
-            ->withFlashSuccess(__('alerts.DummyLabel.updated'));
+            ->withFlashSuccess(__('alerts.backend.DummyLabel.updated'));
     }
 
     /**
@@ -132,7 +132,7 @@ class DummyController extends Controller
         $this->DummyRepoVariable->deleteById($DummyVariable->id);
 
         return redirect()->route('admin.DummyRoute.deleted')
-            ->withFlashSuccess(__('alerts.DummyLabel.deleted'));
+            ->withFlashSuccess(__('alerts.backend.DummyLabel.deleted'));
     }
 
     /**

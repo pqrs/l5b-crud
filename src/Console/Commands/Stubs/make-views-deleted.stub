@@ -36,7 +36,7 @@
                         <tbody>
                         @foreach($DummyArray as $DummyVariable)
                             <tr>
-                                <td class="align-middle"><a href="/DummyRoute/{{ $DummyVariable->id }}">{{ $DummyVariable->DummyField }}</a></td>
+                                <td class="align-middle"><a href="/admin/DummyRoute/{{ $DummyVariable->id }}">{{ $DummyVariable->DummyField }}</a></td>
                                 <td class="align-middle">{!! $DummyVariable->created_at !!}</td>
                                 <td class="align-middle">{{ $DummyVariable->deleted_at->diffForHumans() }}</td>
                                 <td class="align-middle">{!! $DummyVariable->trashed_buttons !!}</td>

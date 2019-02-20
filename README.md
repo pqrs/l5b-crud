@@ -60,11 +60,11 @@ php artisan l5b:crud example -m
 You may also specify the name of the default text field 'title' to whatever other you prefer with the --field option:
 
 ```
-php artisan l5b:crud example --field:name
+php artisan l5b:crud example --field=name
 
 or
 
-php artisan l5b:crud example -f:name
+php artisan l5b:crud example -f name
 ```
 
 ## Include a menu item

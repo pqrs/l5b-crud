@@ -12,6 +12,10 @@ use App\Http\Requests\Backend\ManageDummyRequest;
 use App\Http\Requests\Backend\StoreDummyRequest;
 use App\Http\Requests\Backend\UpdateDummyRequest;
 
+use App\Events\Backend\DummyModel\DummyModelCreated;
+use App\Events\Backend\DummyModel\DummyModelUpdated;
+use App\Events\Backend\DummyModel\DummyModelDeleted;
+
 class DummyController extends Controller
 {
     /**
@@ -68,6 +72,9 @@ class DummyController extends Controller
             'DummyField'
         ));
 
+        // Fire create event (DummyModelCreated)
+        event(new DummyModelCreated($request));
+
         return redirect()->route('admin.DummyRoute.index')
             ->withFlashSuccess(__('alerts.backend.DummyLabel.created'));
     }
@@ -114,6 +121,9 @@ class DummyController extends Controller
             'DummyField'
         ));
 
+        // Fire update event (DummyModelUpdated)
+        event(new DummyModelUpdated($request));
+
         return redirect()->route('admin.DummyRoute.index')
             ->withFlashSuccess(__('alerts.backend.DummyLabel.updated'));
     }
@@ -130,6 +140,9 @@ class DummyController extends Controller
     public function destroy(ManageDummyRequest $request, DummyModel $DummyVariable)
     {
         $this->DummyRepoVariable->deleteById($DummyVariable->id);
+
+        // Fire delete event (DummyModelDeleted)
+        event(new DummyModelDeleted($request));
 
         return redirect()->route('admin.DummyRoute.deleted')
             ->withFlashSuccess(__('alerts.backend.DummyLabel.deleted'));

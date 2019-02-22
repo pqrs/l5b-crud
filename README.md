@@ -287,6 +287,7 @@ HTML code for the menu item for your Laravel 5 Boilerplate sidebar.
 
 ## Changes
 
+- **1.3.7** Added event firing to controller methods.
 - **1.3.6** Added Events and Listeners for Create, Update and Delete operations.
 - **1.3.5** Added --field option to specify the name of the default field
 

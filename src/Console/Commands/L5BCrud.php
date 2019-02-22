@@ -43,14 +43,6 @@ class L5BCrud extends Command
         // Transform l5b:crud command parameter to singular lowercase
         $name = strtolower(snake_case(str_singular($this->argument('name'))));
 
-        $this->event( $name, ucfirst(camel_case($name)) . "Created", 'make-event-created.stub' );
-        $this->event( $name, ucfirst(camel_case($name)) . "Updated", 'make-event-updated.stub' );
-        $this->event( $name, ucfirst(camel_case($name)) . "Deleted", 'make-event-deleted.stub' );
-
-        $this->listener( $name, ucfirst(camel_case($name)) . "EventListener", 'make-listener.stub' );
-
-        dd("hasta aquí");
-
         // Create Model "Name.php"
         $this->model( $name, ucfirst(camel_case($name)), 'make-model.stub' );
 
@@ -71,7 +63,14 @@ class L5BCrud extends Command
         $this->request( $name, "Update" . ucfirst(camel_case($name)) . "Request", 'make-update-request.stub' );
 
         // Create Event "Events/Backend/Example/ExampleCreated.php"
+        // Create Event "Events/Backend/Example/ExampleUpdated.php"
+        // Create Event "Events/Backend/Example/ExampleDeleted.php"
         $this->event( $name, ucfirst(camel_case($name)) . "Created", 'make-event-created.stub' );
+        $this->event( $name, ucfirst(camel_case($name)) . "Updated", 'make-event-updated.stub' );
+        $this->event( $name, ucfirst(camel_case($name)) . "Deleted", 'make-event-deleted.stub' );
+
+        // Create Listener "Listeners/Backend/Example/ExampleEventListener.php"
+        $this->listener( $name, ucfirst(camel_case($name)) . "EventListener", 'make-listener.stub' );
 
         // Create Migraton "YYYY_MM_DD_HHMMSS_create_names_table.php"
         $this->migration( $name, date('Y_m_d_His_') . "create_" . str_plural($name)."_table", 'make-migration.stub' );

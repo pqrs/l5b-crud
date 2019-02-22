@@ -1,6 +1,6 @@
 # CRUD artisan command for rappasoft/laravel-5-boilerplate
 
-Creates a Model, Controller (with Repository and validation Requests), Migration, Routes, Breadcrumbs and CRUD Views for the given name ready to work in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
+Creates a Model, Controller (with Repository, validation Requests, Events and Listeners), Migration, Routes, Breadcrumbs and CRUD Views for the given name ready to work in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
 
 It does not overwrite any files that may exist with the pre-stablished names. So, if you delete one of the files and run the command again, the deleted file will be created again and the rest will be ignored and will keep the changes you could have made.
 
@@ -114,7 +114,7 @@ TODO: generate a file with all the customized language lines ready to copy&paste
 
 ],
 
-_Warning: If you have used the --field option, you should change tabs->content->overview->title to match the field name you have chosen.
+_Warning: If you have used the --field option, you should change tabs->content->overview->title to match the field name you have chosen._
 ```
 
 **menus.php** under _'backend'_
@@ -218,6 +218,20 @@ app/Http/Requests/Backend/UpdateExampleRequest.php
 
 Validation manage, store and update Requests.
 
+### Events
+
+```
+app/Events/Backend/Example/ExampleCreated.php
+app/Events/Backend/Example/ExampleUpdated.php
+app/Events/Backend/Example/ExampleDeleted.php
+```
+
+### Listeners
+
+```
+app/Listeners/Backend/Example/ExampleEventListener.php
+```
+
 ### Migrations
 
 ```
@@ -269,7 +283,12 @@ If you add more fields to your datatable, you'll have to edit _show.blade.php_, 
 sidebar-examples.blade.php
 ```
 
-HTML code for the menu item for your sidebar.
+HTML code for the menu item for your Laravel 5 Boilerplate sidebar.
+
+## Changes
+
+- **1.3.6** Added Events and Listeners for Create, Update and Delete operations.
+- **1.3.5** Added --field option to specify the name of the default field
 
 ## License
 

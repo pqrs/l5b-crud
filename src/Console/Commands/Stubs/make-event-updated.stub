@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Events\Backend\DummyModel;
+
+use Illuminate\Queue\SerializesModels;
+
+/**
+ * Class DummyEventUpdated.
+ */
+class DummyEventUpdated
+{
+    use SerializesModels;
+
+    /**
+     * @var
+     */
+    public $document;
+
+    /**
+     * @param $document
+     */
+    public function __construct($document)
+    {
+        $this->document = $document;
+    }
+}

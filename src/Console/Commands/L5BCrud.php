@@ -43,6 +43,14 @@ class L5BCrud extends Command
         // Transform l5b:crud command parameter to singular lowercase
         $name = strtolower(snake_case(str_singular($this->argument('name'))));
 
+        $this->event( $name, ucfirst(camel_case($name)) . "Created", 'make-event-created.stub' );
+        $this->event( $name, ucfirst(camel_case($name)) . "Updated", 'make-event-updated.stub' );
+        $this->event( $name, ucfirst(camel_case($name)) . "Deleted", 'make-event-deleted.stub' );
+
+        $this->listener( $name, ucfirst(camel_case($name)) . "EventListener", 'make-listener.stub' );
+
+        dd("hasta aquí");
+
         // Create Model "Name.php"
         $this->model( $name, ucfirst(camel_case($name)), 'make-model.stub' );
 
@@ -61,6 +69,9 @@ class L5BCrud extends Command
         $this->request( $name, "Manage" . ucfirst(camel_case($name)) . "Request", 'make-manage-request.stub' );
         $this->request( $name, "Store"  . ucfirst(camel_case($name)) . "Request", 'make-store-request.stub' );
         $this->request( $name, "Update" . ucfirst(camel_case($name)) . "Request", 'make-update-request.stub' );
+
+        // Create Event "Events/Backend/Example/ExampleCreated.php"
+        $this->event( $name, ucfirst(camel_case($name)) . "Created", 'make-event-created.stub' );
 
         // Create Migraton "YYYY_MM_DD_HHMMSS_create_names_table.php"
         $this->migration( $name, date('Y_m_d_His_') . "create_" . str_plural($name)."_table", 'make-migration.stub' );
@@ -104,6 +115,35 @@ class L5BCrud extends Command
         $this->line('Model ' . $stubParams['name'] . Artisan::output());
     }
 
+    protected function event($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'              => $name,
+            'stub'              => __DIR__ . '/Stubs/' . $stub,
+            'namespace'         => '\Events\Backend\\' . ucfirst(camel_case($key)),
+            'event'             => ucfirst(camel_case($key)),
+            'model'             => ucfirst(camel_case($key)),
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Event ' . $stubParams['name'] . Artisan::output());
+    }
+
+    protected function listener($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'              => $name,
+            'stub'              => __DIR__ . '/Stubs/' . $stub,
+            'namespace'         => '\Listeners\Backend\\' . ucfirst(camel_case($key)),
+            'event'             => ucfirst(camel_case($key)),
+            'field'             => $this->option('field'),
+            'model'             => ucfirst(camel_case($key)),
+            'table'             => $key,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Listener ' . $stubParams['name'] . Artisan::output());
+    }
 
     protected function attribute($key, $name, $stub)
     {

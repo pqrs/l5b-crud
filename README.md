@@ -75,6 +75,14 @@ A file named _sidebar-examples.blade.php_ is created in the folder _/resources/v
 @include('backend.example.includes.sidebar-examples')
 ```
 
+## Events and Listeners
+
+The package generates three events and listeners for creating, updating and deleting items methods. In order to get these to work you must resgister them with the event dispatcher, adding this line to your _Providers/EventServiceProvider.php_ file (under _Backend Subscribers_):
+
+```
+\App\Listeners\Backend\Example\ExampleEventListener::class
+```
+
 ## Language lines
 
 Following are the _labels.php_, _menus.php_ and _validation.php_ English language lines needed, copy them into the files in _/resources/lang/en_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
@@ -287,6 +295,7 @@ HTML code for the menu item for your Laravel 5 Boilerplate sidebar.
 
 ## Changes
 
+- **1.3.8** Modified README.md about adding Listener to EventServiceProvider.php.
 - **1.3.7** Added event firing to controller methods.
 - **1.3.6** Added Events and Listeners for Create, Update and Delete operations.
 - **1.3.5** Added --field option to specify the name of the default field

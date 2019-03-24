@@ -16,7 +16,7 @@ class DummyModelEventListener
 
         $newitem = $event->DummyTable->DummyField;
 
-        \Log::info('User ' . $user . ' has created item "' . $newitem);
+        \Log::info('User ' . $user . ' has created item ' . $newitem);
     }
 
     /**
@@ -28,7 +28,7 @@ class DummyModelEventListener
 
         $updated_item   = $event->DummyTable->DummyField;
 
-        \Log::info('User ' . $user . ' has updated item "' . $updated_item);
+        \Log::info('User ' . $user . ' has updated item ' . $updated_item);
     }
 
     /**
@@ -40,7 +40,7 @@ class DummyModelEventListener
 
         $deleted_item   = $event->DummyTable->DummyField;
 
-        \Log::info('User ' . $user . ' has deleted item "' . $deleted_item);    }
+        \Log::info('User ' . $user . ' has deleted item ' . $deleted_item);    }
 
 
     /**

@@ -1,0 +1,29 @@
+<?php
+
+use App\Http\Controllers\Frontend\DummyController;
+
+use App\Models\DummyModel;
+
+Route::bind('DummyVariable', function ($value) {
+	$DummyVariable = new DummyModel;
+
+	return DummyModel::withTrashed()->where($DummyVariable->getRouteKeyName(), $value)->first();
+});
+
+Route::group(['prefix' => 'DummyRoute'], function () {
+	Route::get(	'', 		[DummyController::class, 'index']		)->name('DummyRoute.index');
+    Route::get(	'create', 	[DummyController::class, 'create']	)->name('DummyRoute.create');
+	Route::post('store', 	[DummyController::class, 'store']		)->name('DummyRoute.store');
+    Route::get(	'deleted', 	[DummyController::class, 'deleted']	)->name('DummyRoute.deleted');
+});
+
+Route::group(['prefix' => 'DummyRoute/{DummyVariable}'], function () {
+	// DummyModel
+	Route::get('/', [DummyController::class, 'show'])->name('DummyRoute.show');
+	Route::get('edit', [DummyController::class, 'edit'])->name('DummyRoute.edit');
+	Route::patch('update', [DummyController::class, 'update'])->name('DummyRoute.update');
+	Route::delete('destroy', [DummyController::class, 'destroy'])->name('DummyRoute.destroy');
+	// Deleted
+	Route::get('restore', [DummyController::class, 'restore'])->name('DummyRoute.restore');
+	Route::get('delete', [DummyController::class, 'delete'])->name('DummyRoute.delete-permanently');
+});

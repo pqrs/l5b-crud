@@ -1,20 +1,16 @@
-@extends('backend.layouts.app')
+@extends('frontend.layouts.app')
 
-@section('title', __('backend_DummyLabel.labels.management') . ' | ' . __('backend_DummyLabel.labels.edit'))
-
-@section('breadcrumb-links')
-    @include('backend.DummyView.includes.breadcrumb-links')
-@endsection
+@section('title', __('frontend_DummyLabel.labels.management') . ' | ' . __('frontend_DummyLabel.labels.edit'))
 
 @section('content')
-{{ html()->modelForm($DummyVariable, 'PATCH', route('admin.DummyRoute.update', $DummyVariable->id))->class('form-horizontal')->open() }}
+{{ html()->modelForm($DummyVariable, 'PATCH', route('frontend.DummyRoute.update', $DummyVariable->id))->class('form-horizontal')->open() }}
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-5">
                     <h4 class="card-title mb-0">
-                        @lang('backend_DummyLabel.labels.management')
-                        <small class="text-muted">@lang('backend_DummyLabel.labels.edit')</small>
+                        @lang('frontend_DummyLabel.labels.management')
+                        <small class="text-muted">@lang('frontend_DummyLabel.labels.edit')</small>
                     </h4>
                 </div><!--col-->
             </div><!--row-->
@@ -24,12 +20,12 @@
             <div class="row mt-4 mb-4">
                 <div class="col">
                     <div class="form-group row">
-                    {{ html()->label(__('backend_DummyLabel.validation.attributes.DummyField'))->class('col-md-2 form-control-label')->for('DummyField') }}
+                    {{ html()->label(__('frontend_DummyLabel.validation.attributes.DummyField'))->class('col-md-2 form-control-label')->for('DummyField') }}
 
                         <div class="col-md-10">
                             {{ html()->text('DummyField')
                                 ->class('form-control')
-                                ->placeholder(__('backend_DummyLabel.validation.attributes.DummyField'))
+                                ->placeholder(__('frontend_DummyLabel.validation.attributes.DummyField'))
                                 ->attribute('maxlength', 191)
                                 ->required() }}
                         </div><!--col-->
@@ -41,7 +37,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="col">
-                    {{ form_cancel(route('admin.DummyRoute.index'), __('buttons.general.cancel')) }}
+                    {{ form_cancel(route('frontend.DummyRoute.index'), __('buttons.general.cancel')) }}
                 </div><!--col-->
 
                 <div class="col text-right">

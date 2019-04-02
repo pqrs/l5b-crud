@@ -1,0 +1,60 @@
+<?php
+
+return [
+    'table' => [
+        'DummyField'    => 'DummyField',
+        'created'       => 'Created',
+        'actions'       => 'Actions',
+        'last_updated'  => 'Updated',
+        'total'         => 'Total|Totals',
+        'deleted'       => 'Deleted',
+    ],
+
+    'alerts' => [
+        'created' => 'New DummyModel created',
+        'updated' => 'DummyModel updated',
+        'deleted' => 'DummyModel was deleted',
+        'deleted_permanently' => 'DummyModel was permanently deleted',
+        'restored'  => 'DummyModel was restored',
+    ],
+
+    'labels'    => [
+        'management'    => 'Management of DummyModel',
+        'active'        => 'Active',
+        'create'        => 'Create',
+        'edit'          => 'Edit',
+        'view'          => 'View',
+        'DummyField'    => 'DummyField',
+        'created_at'    => 'Created at',
+        'last_updated'  => 'Updated at',
+        'deleted'       => 'Deleted',
+    ],
+
+    'validation' => [
+        'attributes' => [
+            'DummyField' => 'DummyField',
+        ]
+    ],
+
+    'sidebar' => [
+        'title'  => 'Title',
+    ],
+
+    'tabs' => [
+        'DummyField'    => 'DummyField',
+        'content'   => [
+            'overview' => [
+                'DummyField'    => 'DummyField',
+                'created_at'    => 'Created',
+                'last_updated'  => 'Updated'
+            ],
+        ],
+    ],
+
+    'menus' => [
+      'main' => 'DummyModel',
+      'all' => 'All',
+      'create' => 'Create',
+      'deleted' => 'Deleted'
+    ]
+];

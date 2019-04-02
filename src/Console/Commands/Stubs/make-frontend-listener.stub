@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Listeners\Frontend\DummyModel;
+
+/**
+ * Class DummyModelEventListener.
+ */
+class DummyModelEventListener
+{
+    /**
+     * @param $event
+     */
+    public function onCreated($event)
+    {
+        $user    = auth()->user()->name;
+
+        $newitem = $event->DummyTable->DummyField;
+
+        \Log::info('User ' . $user . ' has created item ' . $newitem);
+    }
+
+    /**
+     * @param $event
+     */
+    public function onUpdated($event)
+    {
+        $user           = auth()->user()->name;
+
+        $updated_item   = $event->DummyTable->DummyField;
+
+        \Log::info('User ' . $user . ' has updated item ' . $updated_item);
+    }
+
+    /**
+     * @param $event
+     */
+    public function onDeleted($event)
+    {
+        $user           = auth()->user()->name;
+
+        $deleted_item   = $event->DummyTable->DummyField;
+
+        \Log::info('User ' . $user . ' has deleted item ' . $deleted_item);    }
+
+
+    /**
+     * Register the listeners for the subscriber.
+     *
+     * @param \Illuminate\Events\Dispatcher $events
+     */
+    public function subscribe($events)
+    {
+        $events->listen(
+            \App\Events\Backend\DummyModel\DummyModelCreated::class,
+            'App\Listeners\Backend\DummyModel\DummyModelEventListener@onCreated'
+        );
+
+        $events->listen(
+            \App\Events\Backend\DummyModel\DummyModelUpdated::class,
+            'App\Listeners\Backend\DummyModel\DummyModelEventListener@onUpdated'
+        );
+
+        $events->listen(
+            \App\Events\Backend\DummyModel\DummyModelDeleted::class,
+            'App\Listeners\Backend\DummyModel\DummyModelEventListener@onDeleted'
+        );
+    }
+}

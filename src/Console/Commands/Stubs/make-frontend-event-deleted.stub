@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Events\Backend\DummyModel;
+namespace App\Events\Frontend\DummyModel;
 
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class DummyEventUpdated.
+ * Class DummyEventDeleted.
  */
-class DummyEventUpdated
+class DummyEventDeleted
 {
     use SerializesModels;
 

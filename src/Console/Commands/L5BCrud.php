@@ -14,7 +14,7 @@ class L5BCrud extends Command
     *
     * @var string
     */
-    protected $signature = 'l5b:crud {name} {--m|migrate} {--f|field=title}';
+    protected $signature = 'l5b:crud {name} {--m|migrate} {--f|field=title} {--frontend} {--force}';
 
     /**
     * The console command description.
@@ -23,6 +23,7 @@ class L5BCrud extends Command
     */
     protected $description = 'Create a complete CRUD structure for Laravel 5 Boilerplate Backend';
 
+    public $doforce;
     /**
     * Create a new command instance.
     *
@@ -40,6 +41,7 @@ class L5BCrud extends Command
     */
     public function handle()
     {
+
         // Transform l5b:crud command parameter to singular lowercase
         $name = strtolower(snake_case(str_singular($this->argument('name'))));
 
@@ -72,7 +74,7 @@ class L5BCrud extends Command
         // Create Listener "Listeners/Backend/Example/ExampleEventListener.php"
         $this->listener( $name, ucfirst(camel_case($name)) . "EventListener", 'make-listener.stub' );
 
-        // Create Migraton "YYYY_MM_DD_HHMMSS_create_names_table.php"
+        // Create Migration "YYYY_MM_DD_HHMMSS_create_names_table.php"
         $this->migration( $name, date('Y_m_d_His_') . "create_" . str_plural($name)."_table", 'make-migration.stub' );
 
         // Create Routes "names.php"
@@ -97,6 +99,36 @@ class L5BCrud extends Command
         $this->view( $name, '/includes/breadcrumb-links', 'make-views-breadcrumb-links.stub' );
         $this->view( $name, '/includes/header-buttons', 'make-views-header-buttons.stub' );
         $this->view( $name, '/includes/sidebar-'. str_plural($name), 'make-views-sidebar.stub' );
+
+        $this->label($name,$name,'make-backend-labels.stub');
+
+        if($this->option('frontend'))
+        {
+            $this->frontend_controller( $name, ucfirst(camel_case($name)) . "Controller", 'make-frontend-controller.stub' );
+            $this->frontend_repository( $name, ucfirst(camel_case($name)) . "Repository", 'make-frontend-repository.stub' );
+
+            $this->frontend_request( $name, "Manage" . ucfirst(camel_case($name)) . "Request", 'make-frontend-manage-request.stub' );
+            $this->frontend_request( $name, "Store"  . ucfirst(camel_case($name)) . "Request", 'make-frontend-store-request.stub' );
+            $this->frontend_request( $name, "Update" . ucfirst(camel_case($name)) . "Request", 'make-frontend-update-request.stub' );
+
+            $this->frontend_event( $name, ucfirst(camel_case($name)) . "Created", 'make-frontend-event-created.stub' );
+            $this->frontend_event( $name, ucfirst(camel_case($name)) . "Updated", 'make-frontend-event-updated.stub' );
+            $this->frontend_event( $name, ucfirst(camel_case($name)) . "Deleted", 'make-frontend-event-deleted.stub' );
+
+            $this->frontend_listener( $name, ucfirst(camel_case($name)) . "EventListener", 'make-frontend-listener.stub' );
+
+            $this->frontend_routes( $name, str_plural($name), 'make-frontend-routes.stub' );
+
+            $this->frontend_view( $name, 'index', 'make-frontend-views-index.stub' );
+            $this->frontend_view( $name, 'create', 'make-frontend-views-create.stub' );
+            $this->frontend_view( $name, 'edit', 'make-frontend-views-edit.stub' );
+            $this->frontend_view( $name, 'show', 'make-frontend-views-show.stub' );
+            $this->frontend_view( $name, 'deleted', 'make-frontend-views-deleted.stub' );
+            $this->frontend_view( $name, '/includes/header-buttons', 'make-frontend-views-header-buttons.stub' );
+
+            $this->frontend_label($name,$name,'make-frontend-labels.stub');
+        }
+
     }
 
     protected function model($key, $name, $stub)
@@ -108,6 +140,7 @@ class L5BCrud extends Command
             'attribute'         => ucfirst(camel_case($key)) . "Attribute",
             'field'             => $this->option('field'),
             'model'             => ucfirst(camel_case($key)),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -122,6 +155,9 @@ class L5BCrud extends Command
             'namespace'         => '\Events\Backend\\' . ucfirst(camel_case($key)),
             'event'             => ucfirst(camel_case($key)),
             'model'             => ucfirst(camel_case($key)),
+            'table'             =>  str_plural($key),
+            'field'             => $this->option('field'),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -138,6 +174,7 @@ class L5BCrud extends Command
             'field'             => $this->option('field'),
             'model'             => ucfirst(camel_case($key)),
             'table'             => $key,
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -153,6 +190,7 @@ class L5BCrud extends Command
             'attribute'         => ucfirst(camel_case($key)) . "Attribute",
             'route'             => str_plural($key),
             'label'             => str_plural($key),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -176,6 +214,7 @@ class L5BCrud extends Command
             'route'                 => str_plural($key),
             'variable'              => camel_case($key),
             'view'                  => $key,
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -193,6 +232,7 @@ class L5BCrud extends Command
             'repository'            => ucfirst(camel_case($key)) . "Repository",
             'variable'              => $key,
             'label'                 => str_plural($key),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -205,8 +245,9 @@ class L5BCrud extends Command
             'name'                  => $name,
             'stub'                  => __DIR__ . '/Stubs/' . $stub,
             'field'                 => $this->option('field'),
-            'namespace'             => '\Http\Requests\Backend',
+            'namespace'             => '\Http\Requests\Backend\\' . ucfirst(camel_case($key)),
             'model'                 => ucfirst(camel_case($key)),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -222,6 +263,7 @@ class L5BCrud extends Command
             'namespace'             => '\..\database\migrations',
             'class'                 => "Create" . ucfirst(str_plural(camel_case($key))) . "Table",
             'table'                 => str_plural($key),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         // If no migration with name "*create_names_table.php" exists then create it
@@ -249,6 +291,7 @@ class L5BCrud extends Command
             'model'                 => ucfirst(camel_case($key)),
             'route'                 => str_plural($key),
             'variable'              => $key,
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -262,6 +305,7 @@ class L5BCrud extends Command
             'stub'                  => __DIR__ . '/Stubs/' . $stub,
             'namespace'             => '\..\routes\breadcrumbs\backend',
             'route'                 => str_plural($key),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
@@ -291,10 +335,180 @@ class L5BCrud extends Command
             'route'                 => str_plural($key),
             'variable'              => camel_case($key),
             'view'                  => $key,
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
 
         Artisan::call('l5b:stub', $stubParams);
         $this->line('View ' . $stubParams['name'] . Artisan::output());
     }
 
+    protected function label($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'                  => 'backend_' . str_plural($name),
+            'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'namespace'             => '\..\resources\lang\en\\',
+            'label'                 => str_plural($key),
+            'array'                 => camel_case(str_plural($key)),
+            'field'                 => $this->option('field'),
+            'route'                 => str_plural($key),
+            'variable'              => camel_case($key),
+            'view'                  => $key,
+            'model'                 => ucfirst(camel_case($key)),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Label ' . $stubParams['name'] . Artisan::output());
+    }
+
+    /*
+     *  Frontend
+     */
+    protected function frontend_controller($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'                  => $name,
+            'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'namespace'             => '\Http\Controllers\Frontend',
+            'array'                 => camel_case(str_plural($key)),
+            'controller'            => ucfirst(camel_case($key)) . "Controller",
+            'field'                 => $this->option('field'),
+            'label'                 => str_plural($key),
+            'model'                 => ucfirst(camel_case($key)),
+            'repository'            => ucfirst(camel_case($key)) . "Repository",
+            'repositoryVariable'    => $key . "Repository",
+            'request'               => ucfirst(camel_case($key)) . "Request",
+            'route'                 => str_plural($key),
+            'variable'              => camel_case($key),
+            'view'                  => $key,
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Controller ' . $stubParams['name'] . Artisan::output());
+    }
+
+    protected function frontend_event($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'              => $name,
+            'stub'              => __DIR__ . '/Stubs/' . $stub,
+            'namespace'         => '\Events\Frontend\\' . ucfirst(camel_case($key)),
+            'event'             => ucfirst(camel_case($key)),
+            'model'             => ucfirst(camel_case($key)),
+            'table'             =>  str_plural($key),
+            'field'             => $this->option('field'),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Event ' . $stubParams['name'] . Artisan::output());
+    }
+
+    protected function frontend_listener($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'              => $name,
+            'stub'              => __DIR__ . '/Stubs/' . $stub,
+            'namespace'         => '\Listeners\Frontend\\' . ucfirst(camel_case($key)),
+            'event'             => ucfirst(camel_case($key)),
+            'field'             => $this->option('field'),
+            'model'             => ucfirst(camel_case($key)),
+            'table'             => $key,
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Listener ' . $stubParams['name'] . Artisan::output());
+    }
+
+    protected function frontend_repository($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'                  => $name,
+            'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'field'                 => $this->option('field'),
+            'namespace'             => '\Repositories\Frontend\\' . ucfirst(camel_case($key)),
+            'model'                 => ucfirst(camel_case($key)),
+            'repository'            => ucfirst(camel_case($key)) . "Repository",
+            'variable'              => $key,
+            'label'                 => str_plural($key),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Repository ' . $stubParams['name'] . Artisan::output());
+    }
+
+    protected function frontend_request($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'                  => $name,
+            'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'field'                 => $this->option('field'),
+            'namespace'             => '\Http\Requests\Frontend\\' . ucfirst(camel_case($key)),
+            'model'                 => ucfirst(camel_case($key)),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Request ' . $stubParams['name'] . Artisan::output());
+    }
+    protected function frontend_routes($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'                  => str_replace('_','', $name),
+            'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'namespace'             => '\..\routes\frontend',
+            'controller'            => ucfirst(camel_case($key)) . "Controller",
+            'model'                 => ucfirst(camel_case($key)),
+            'route'                 => str_plural($key),
+            'variable'              => $key,
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Routes ' . $stubParams['name'] . Artisan::output());
+    }
+
+    protected function frontend_view($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'                  => $name . ".blade",
+            'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'namespace'             => '\..\resources\views\frontend' . '\\' . $key,
+            'label'                 => str_plural($key),
+            'array'                 => camel_case(str_plural($key)),
+            'field'                 => $this->option('field'),
+            'route'                 => str_plural($key),
+            'variable'              => camel_case($key),
+            'view'                  => $key,
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('View ' . $stubParams['name'] . Artisan::output());
+    }
+
+    protected function frontend_label($key, $name, $stub)
+    {
+        $stubParams = [
+            'name'                  => 'frontend_' . str_plural($name),
+            'stub'                  => __DIR__ . '/Stubs/' . $stub,
+            'namespace'             => '\..\resources\lang\en\\',
+            'label'                 => str_plural($key),
+            'array'                 => camel_case(str_plural($key)),
+            'field'                 => $this->option('field'),
+            'route'                 => str_plural($key),
+            'variable'              => camel_case($key),
+            'view'                  => $key,
+            'model'                 => ucfirst(camel_case($key)),
+            '--force'           => $this->hasOption('force') ? $this->option('force') : false,
+        ];
+
+        Artisan::call('l5b:stub', $stubParams);
+        $this->line('Label ' . $stubParams['name'] . Artisan::output());
+    }
 }

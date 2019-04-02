@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backend;
+namespace App\Http\Requests\Backend\DummyModel;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;

@@ -14,13 +14,13 @@ class DummyEventDeleted
     /**
      * @var
      */
-    public $document;
+    public $DummyTable;
 
     /**
-     * @param $document
+     * @param $DummyTable
      */
-    public function __construct($document)
+    public function __construct($DummyTable)
     {
-        $this->document = $document;
+        $this->DummyTable = $DummyTable;
     }
 }

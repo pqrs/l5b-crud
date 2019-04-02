@@ -122,8 +122,9 @@ TODO: generate a file with all the customized language lines ready to copy&paste
 
 ],
 
-_Warning: If you have used the --field option, you should change tabs->content->overview->title to match the field name you have chosen._
 ```
+
+_Warning: If you have used the --field option, you should change tabs->content->overview->title to match the field name you have chosen._
 
 **menus.php** under _'backend'_
 
@@ -150,9 +151,9 @@ _Warning: If you have used the --field option, you should change tabs->content->
 'examples' => [
     'title'            => 'Title',
 ],
-
-_Warning: If you have used the --field option, you should change 'title' to match the field name you have chosen.
 ```
+
+\_Warning: If you have used the --field option, you should change 'title' to match the field name you have chosen.
 
 **alerts.php** under _'backend'_
 

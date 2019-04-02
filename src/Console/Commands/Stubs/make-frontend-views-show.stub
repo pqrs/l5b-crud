@@ -1,10 +1,6 @@
-@extends('backend.layouts.app')
+@extends('frontend.layouts.app')
 
-@section('title', __('backend_DummyLabel.labels.management') . ' | ' . __('backend_DummyLabel.labels.view'))
-
-@section('breadcrumb-links')
-    @include('backend.DummyView.includes.breadcrumb-links')
-@endsection
+@section('title', __('frontend_DummyLabel.labels.management') . ' | ' . __('frontend_DummyLabel.labels.view'))
 
 @section('content')
 <div class="card">
@@ -12,8 +8,8 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    @lang('backend_DummyLabel.labels.management')
-                    <small class="text-muted">@lang('backend_DummyLabel.labels.view')</small>
+                    @lang('frontend_DummyLabel.labels.management')
+                    <small class="text-muted">@lang('frontend_DummyLabel.labels.view')</small>
                 </h4>
             </div><!--col-->
         </div><!--row-->
@@ -22,7 +18,7 @@
             <div class="col">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-expanded="true"><i class="fas fa-user"></i> @lang('backend_DummyLabel.tabs.title')</a>
+                        <a class="nav-link active" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-expanded="true"><i class="fas fa-user"></i> @lang('frontend_DummyLabel.labels.title')</a>
                     </li>
                 </ul>
 
@@ -33,7 +29,7 @@
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <tr>
-                                        <th>@lang('backend_DummyLabel.tabs.content.overview.DummyField')</th>
+                                        <th>@lang('frontend_DummyLabel.labels.DummyField')</th>
                                         <td>{{ $DummyVariable->DummyField }}</td>
                                     </tr>
                                 </table>
@@ -50,10 +46,10 @@
         <div class="row">
             <div class="col">
                 <small class="float-right text-muted">
-                    <strong>@lang('backend_DummyLabel.tabs.content.overview.created_at'):</strong> {{ timezone()->convertToLocal($DummyVariable->created_at) }} ({{ $DummyVariable->created_at->diffForHumans() }}),
-                    <strong>@lang('backend_DummyLabel.tabs.content.overview.last_updated'):</strong> {{ timezone()->convertToLocal($DummyVariable->updated_at) }} ({{ $DummyVariable->updated_at->diffForHumans() }})
+                    <strong>@lang('frontend_DummyLabel.labels.created_at'):</strong> {{ timezone()->convertToLocal($DummyVariable->created_at) }} ({{ $DummyVariable->created_at->diffForHumans() }}),
+                    <strong>@lang('frontend_DummyLabel.labels.last_updated'):</strong> {{ timezone()->convertToLocal($DummyVariable->updated_at) }} ({{ $DummyVariable->updated_at->diffForHumans() }})
                     @if($DummyVariable->trashed())
-                        <strong>@lang('backend_DummyLabel.tabs.content.overview.deleted_at'):</strong> {{ timezone()->convertToLocal($DummyVariable->deleted_at) }} ({{ $DummyVariable->deleted_at->diffForHumans() }})
+                        <strong>@lang('frontend_DummyLabel.labels.deleted_at'):</strong> {{ timezone()->convertToLocal($DummyVariable->deleted_at) }} ({{ $DummyVariable->deleted_at->diffForHumans() }})
                     @endif
                 </small>
             </div><!--col-->

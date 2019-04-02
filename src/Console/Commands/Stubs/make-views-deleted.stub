@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('labels.backend.DummyLabel.management'))
+@section('title', app_name() . ' | ' . __('backend_DummyLabel.labels.management'))
 
 @section('breadcrumb-links')
     @include('backend.DummyView.includes.breadcrumb-links')
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    {{ __('labels.backend.DummyLabel.management') }} <small class="text-muted">{{ __('labels.backend.DummyLabel.deleted') }}</small>
+                    {{ __('backend_DummyLabel.labels.management') }} <small class="text-muted">{{ __('backend_DummyLabel.labels.deleted') }}</small>
                 </h4>
             </div><!--col-->
 
@@ -27,9 +27,9 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>@lang('labels.backend.DummyLabel.table.DummyField')</th>
-                            <th>@lang('labels.backend.DummyLabel.table.created')</th>
-                            <th>@lang('labels.backend.DummyLabel.table.deleted')</th>
+                            <th>@lang('backend_DummyLabel.table.DummyField')</th>
+                            <th>@lang('backend_DummyLabel.table.created')</th>
+                            <th>@lang('backend_DummyLabel.table.deleted')</th>
                             <th>@lang('labels.general.actions')</th>
                         </tr>
                         </thead>
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-7">
                 <div class="float-left">
-                    {!! $DummyArray->count() !!} {{ trans_choice('labels.backend.DummyLabel.table.total', $DummyArray->count()) }}
+                    {!! $DummyArray->count() !!} {{ trans_choice('backend_DummyLabel.table.total', $DummyArray->count()) }}
                 </div>
             </div><!--col-->
 

@@ -1,10 +1,6 @@
-@extends('backend.layouts.app')
+@extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('backend_DummyLabel.labels.management'))
-
-@section('breadcrumb-links')
-    @include('backend.DummyView.includes.breadcrumb-links')
-@endsection
+@section('title', app_name() . ' | ' . __('frontend_DummyLabel.labels.management'))
 
 @section('content')
 <div class="card">
@@ -12,12 +8,12 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    {{ __('backend_DummyLabel.labels.management') }} <small class="text-muted">{{ __('backend_DummyLabel.labels.active') }}</small>
+                    {{ __('frontend_DummyLabel.labels.management') }} <small class="text-muted">{{ __('frontend_DummyLabel.labels.deleted') }}</small>
                 </h4>
             </div><!--col-->
 
             <div class="col-sm-7">
-                @include('backend.DummyView.includes.header-buttons')
+                @include('frontend.DummyView.includes.header-buttons')
             </div><!--col-->
         </div><!--row-->
 
@@ -27,19 +23,19 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>@lang('backend_DummyLabel.table.DummyField')</th>
-                            <th>@lang('backend_DummyLabel.table.created')</th>
-                            <th>@lang('backend_DummyLabel.table.last_updated')</th>
-                            <th>@lang('backend_DummyLabel.table.actions')</th>
+                            <th>@lang('frontend_DummyLabel.table.DummyField')</th>
+                            <th>@lang('frontend_DummyLabel.table.created')</th>
+                            <th>@lang('frontend_DummyLabel.table.deleted')</th>
+                            <th>@lang('labels.general.actions')</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($DummyArray as $DummyVariable)
                             <tr>
-                                <td class="align-middle"><a href="/admin/DummyRoute/{{ $DummyVariable->id }}">{{ $DummyVariable->DummyField }}</a></td>
+                                <td class="align-middle"><a href="/frontend/DummyRoute/{{ $DummyVariable->id }}">{{ $DummyVariable->DummyField }}</a></td>
                                 <td class="align-middle">{!! $DummyVariable->created_at !!}</td>
-                                <td class="align-middle">{{ $DummyVariable->updated_at->diffForHumans() }}</td>
-                                <td class="align-middle">{!! $DummyVariable->action_buttons !!}</td>
+                                <td class="align-middle">{{ $DummyVariable->deleted_at->diffForHumans() }}</td>
+                                <td class="align-middle">{!! $DummyVariable->frontend_trashed_buttons !!}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -50,7 +46,7 @@
         <div class="row">
             <div class="col-7">
                 <div class="float-left">
-                    {!! $DummyArray->count() !!} {{ trans_choice('backend_DummyLabel.table.total', $DummyArray->count()) }}
+                    {!! $DummyArray->count() !!} {{ trans_choice('frontend_DummyLabel.table.total', $DummyArray->count()) }}
                 </div>
             </div><!--col-->
 

@@ -4,6 +4,7 @@ namespace pqrs\L5BCrud\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class L5BStub extends GeneratorCommand
 {
@@ -134,4 +135,20 @@ class L5BStub extends GeneratorCommand
 			['view',				InputArgument::OPTIONAL, 'View name', null],
 		];
 	}
+/*
+    protected function getOptions()
+    {
+        return [
+            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production'],
+        ];
+    }
+*/
+    protected function getOptions()
+    {
+
+        return array(
+            array('force', null, InputOption::VALUE_OPTIONAL, 'Overwrite files if they exists'),
+            array('frontend', null, InputOption::VALUE_OPTIONAL, 'Create frontend files'),
+        );
+    }
 }

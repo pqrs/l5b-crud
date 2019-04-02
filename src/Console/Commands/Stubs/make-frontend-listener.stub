@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners\Backend\DummyModel;
+namespace App\Listeners\Frontend\DummyModel;
 
 /**
  * Class DummyModelEventListener.

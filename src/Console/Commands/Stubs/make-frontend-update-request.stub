@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Backend\DummyModel;
+namespace App\Http\Requests\Frontend\DummyModel;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class StoreDummyModelRequest.
+ * Class UpdateDummyModelRequest.
  */
-class StoreDummyModelRequest extends FormRequest
+class UpdateDummyModelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,7 +17,7 @@ class StoreDummyModelRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->isAdmin();
+        return true;
     }
 
     /**

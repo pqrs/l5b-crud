@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Exceptions\GeneralException;
 
 use App\Models\DummyModel;
-use App\Repositories\Backend\DummyRepository;
-use App\Http\Requests\Backend\DummyModel\ManageDummyRequest;
-use App\Http\Requests\Backend\DummyModel\StoreDummyRequest;
-use App\Http\Requests\Backend\DummyModel\UpdateDummyRequest;
+use App\Repositories\Frontend\DummyModel\DummyRepository;
+use App\Http\Requests\Frontend\DummyModel\ManageDummyRequest;
+use App\Http\Requests\Frontend\DummyModel\StoreDummyRequest;
+use App\Http\Requests\Frontend\DummyModel\UpdateDummyRequest;
 
-use App\Events\Backend\DummyModel\DummyModelCreated;
-use App\Events\Backend\DummyModel\DummyModelUpdated;
-use App\Events\Backend\DummyModel\DummyModelDeleted;
+use App\Events\Frontend\DummyModel\DummyModelCreated;
+use App\Events\Frontend\DummyModel\DummyModelUpdated;
+use App\Events\Frontend\DummyModel\DummyModelDeleted;
 
 class DummyController extends Controller
 {
@@ -42,7 +42,7 @@ class DummyController extends Controller
      */
     public function index(ManageDummyRequest $request)
     {
-        return view('backend.DummyView.index')
+        return view('frontend.DummyView.index')
             ->withDummyArray($this->DummyRepoVariable->getActivePaginated(25, 'id', 'asc'));
     }
 
@@ -55,7 +55,7 @@ class DummyController extends Controller
      */
     public function create(ManageDummyRequest $request)
     {
-        return view('backend.DummyView.create');
+        return view('frontend.DummyView.create');
     }
 
     /**
@@ -75,8 +75,8 @@ class DummyController extends Controller
         // Fire create event (DummyModelCreated)
         event(new DummyModelCreated($request));
 
-        return redirect()->route('admin.DummyRoute.index')
-            ->withFlashSuccess(__('backend_DummyLabel.alerts.created'));
+        return redirect()->route('frontend.DummyRoute.index')
+            ->withFlashSuccess(__('frontend_DummyLabel.alerts.created'));
     }
 
     /**
@@ -89,7 +89,7 @@ class DummyController extends Controller
      */
     public function show(ManageDummyRequest $request, DummyModel $DummyVariable)
     {
-        return view('backend.DummyView.show')->withDummyModel($DummyVariable);
+        return view('frontend.DummyView.show')->withDummyModel($DummyVariable);
     }
 
     /**
@@ -102,7 +102,7 @@ class DummyController extends Controller
      */
     public function edit(ManageDummyRequest $request, DummyModel $DummyVariable)
     {
-        return view('backend.DummyView.edit')->withDummyModel($DummyVariable);
+        return view('frontend.DummyView.edit')->withDummyModel($DummyVariable);
     }
 
     /**
@@ -124,8 +124,8 @@ class DummyController extends Controller
         // Fire update event (DummyModelUpdated)
         event(new DummyModelUpdated($request));
 
-        return redirect()->route('admin.DummyRoute.index')
-            ->withFlashSuccess(__('backend_DummyLabel.alerts.updated'));
+        return redirect()->route('frontend.DummyRoute.index')
+            ->withFlashSuccess(__('frontend_DummyLabel.alerts.updated'));
     }
 
     /**
@@ -144,8 +144,8 @@ class DummyController extends Controller
         // Fire delete event (DummyModelDeleted)
         event(new DummyModelDeleted($request));
 
-        return redirect()->route('admin.DummyRoute.deleted')
-            ->withFlashSuccess(__('backend_DummyLabel.alerts.deleted'));
+        return redirect()->route('frontend.DummyRoute.deleted')
+            ->withFlashSuccess(__('frontend_DummyLabel.alerts.deleted'));
     }
 
     /**
@@ -162,8 +162,8 @@ class DummyController extends Controller
     {
         $this->DummyRepoVariable->forceDelete($deletedDummyModel);
 
-        return redirect()->route('admin.DummyRoute.deleted')
-            ->withFlashSuccess(__('backend_DummyLabel.alerts.deleted_permanently'));
+        return redirect()->route('frontend.DummyRoute.deleted')
+            ->withFlashSuccess(__('frontend_DummyLabel.alerts.deleted_permanently'));
     }
 
     /**
@@ -177,8 +177,8 @@ class DummyController extends Controller
     {
         $this->DummyRepoVariable->restore($deletedDummyModel);
 
-        return redirect()->route('admin.DummyRoute.index')
-            ->withFlashSuccess(__('backend_DummyLabel.alerts.restored'));
+        return redirect()->route('frontend.DummyRoute.index')
+            ->withFlashSuccess(__('frontend_DummyLabel.alerts.restored'));
     }
 
     /**
@@ -190,7 +190,7 @@ class DummyController extends Controller
      */
     public function deleted(ManageDummyRequest $request)
     {
-        return view('backend.DummyView.deleted')
+        return view('frontend.DummyView.deleted')
             ->withDummyArray($this->DummyRepoVariable->getDeletedPaginated(25, 'id', 'asc'));
     }
 }

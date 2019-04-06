@@ -2,7 +2,9 @@
 
 Creates a Model, Controller (with Repository, validation Requests, Events and Listeners), Migration, Routes, Breadcrumbs and CRUD Views for the given name ready to work in [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/) backend.
 
-It does not overwrite any files that may exist with the pre-stablished names. So, if you delete one of the files and run the command again, the deleted file will be created again and the rest will be ignored and will keep the changes you could have made.
+From version 1.4 you can also optionally generate frontend files: Controller, Labels, Event, Request, Listener, View, Route and Repository.
+
+By default it does not overwrite any files that may exist with the pre-stablished names. So, if you delete one of the files and run the command again, the deleted file will be created again and the rest will be ignored and will keep the changes you could have made.
 
 ## Requires
 
@@ -67,6 +69,18 @@ or
 php artisan l5b:crud example -f name
 ```
 
+You can also overwrite previously created files with the --force option.
+
+```
+php artisan l5b:crud example --force
+```
+
+To generate the frontend files also, you should use the --frontend option.
+
+```
+php artisan l5b:crud example --frontend
+```
+
 ## Include a menu item
 
 A file named _sidebar-examples.blade.php_ is created in the folder _/resources/views/backend/example/includes_. It contains the html code for a menu item to access your recently created views. You can show it in your sidebar by including the following line in _/resources/views/backend/includes/sidebar.blade.php_ wherever you want it to appear:
@@ -85,107 +99,9 @@ The package generates three events and listeners for creating, updating and dele
 
 ## Language lines
 
-Following are the _labels.php_, _menus.php_ and _validation.php_ English language lines needed, copy them into the files in _/resources/lang/en_ or whatever other language folder you may need. Replace _Example_ for the name of your Model.
+Customized English language lines can be found _/resources/lang/en_. There is a file for backend lines (backend_examples.php) and another for frontend (frontend_examples.php).
 
-TODO: generate a file with all the customized language lines ready to copy&paste.
-
-**labels.php** under _'backend'_:
-
-```
-'examples' => [
-    'management'    => 'Example Management',
-    'active'        => 'Active Examples',
-    'view'          => 'View Example',
-    'edit'          => 'Edit Example',
-    'create'        => 'Create Example',
-    'create_new'    => 'Create New Example',
-    'table'         => [
-        'title'         => 'Title',
-        'created'       => 'Created',
-        'last_updated'  => 'Last Updated',
-        'deleted'       => 'Deleted',
-        'actions'       => 'Actions',
-        'tab_title'     => 'Overview',
-        'total'         => 'example total|examples total',
-    ],
-
-    'tabs' => [
-        'title' => 'Overview',
-        'content' => [
-            'overview'  => [
-                'title'         => 'Title',
-                'created_at'    => 'Created',
-                'last_updated'  => 'Last Updated',
-            ],
-        ],
-    ],
-
-],
-
-```
-
-_Warning: If you have used the --field option, you should change tabs->content->overview->title to match the field name you have chosen._
-
-**menus.php** under _'backend'_
-
-```
-'examples' => [
-    'main'            => 'Examples',
-    'all'             => 'All Examples',
-    'create'          => 'Create Example',
-    'deleted'         => 'Deleted Examples',
-    'view'            => 'View Example',
-    'edit'            => 'Edit Example',
-],
-```
-
-**menus.php** under _'backend' => 'sidebar'_
-
-```
-'examples'  => 'Examples',
-```
-
-**validation.php** under _'attributes' => 'backend'_
-
-```
-'examples' => [
-    'title'            => 'Title',
-],
-```
-
-\_Warning: If you have used the --field option, you should change 'title' to match the field name you have chosen.
-
-**alerts.php** under _'backend'_
-
-```
-'examples' => [
-    'created'                   => 'The example was successfully created.',
-    'updated'                   => 'The example was successfully updated.',
-    'deleted'                   => 'The example was successfully deleted.',
-    'restored'                  => 'The example was successfully restored.',
-    'deleted_permanently'       => 'The example was deleted permanently.',
-],
-```
-
-**buttons.php** under _'backend'_
-
-```
-'examples' => [
-    'restore' => 'Restore Example',
-    'delete_permanently'    => 'Permanently delete Example',
-],
-```
-
-**exceptions.php** under _'backend'_
-
-```
-'examples' => [
-    'cant_restore'          => 'This Example is not deleted so it can not be restored.',
-    'delete_first'          => 'This Example must be deleted first before it can be destroyed permanently.',
-]
-```
-
-## Files created
+## Backend Files created
 
 ### Model
 
@@ -294,8 +210,72 @@ sidebar-examples.blade.php
 
 HTML code for the menu item for your Laravel 5 Boilerplate sidebar.
 
+## Fronted Files created
+
+### Controller
+
+```
+app/Http/Controllers/Frontend/ExampleController.php
+```
+
+It contains the CRUD methods: _index_, _create_, _store_, _show_, _edit_, _update_, _destroy_, _delete_, _restore_ and _deleted_.
+
+### Repository
+
+```
+app/Repositories/Frontend/ExampleRepository.php
+```
+
+Contains database logic.
+
+### Requests
+
+```
+app/Http/Requests/Frontend/ManageExampleRequest.php
+app/Http/Requests/Frontend/StoreExampleRequest.php
+app/Http/Requests/Frontend/UpdateExampleRequest.php
+```
+
+Validation manage, store and update Requests.
+
+### Events
+
+```
+app/Events/Frontend/Example/ExampleCreated.php
+app/Events/Frontend/Example/ExampleUpdated.php
+app/Events/Frontend/Example/ExampleDeleted.php
+```
+
+### Listeners
+
+```
+app/Listeners/Frontend/Example/ExampleEventListener.php
+```
+
+### Routes
+
+```
+routes/frontend/examples.php
+```
+
+Contains the named routes _examples.index_, _examples.deleted_, _examples.restore_, _delete-permanently_, _examples.create_, _examples.store_, _examples.show_, _examples.edit_, _examples.update_ and _examples.destroy_.
+
+### Views
+
+```
+resources/views/frontend/example/index.blade.php
+resources/views/frontend/example/show.blade.php
+resources/views/frontend/example/create.blade.php
+resources/views/frontend/example/edit.blade.php
+resources/views/frontend/example/deleted.blade.php
+resources/views/frontend/example/includes/header-buttons.blade.php
+```
+
+If you add more fields to your datatable, you'll have to edit _show.blade.php_, _create.blade.php_ and _edit.blade.php_ to suit your needs.
+
 ## Changes
 
+- **1.4** Added language lines files. Added options for frontend file generation and force overwriting of previous files. Thanks @rabol for your contribution.
 - **1.3.8** Modified README.md about adding Listener to EventServiceProvider.php.
 - **1.3.7** Added event firing to controller methods.
 - **1.3.6** Added Events and Listeners for Create, Update and Delete operations.

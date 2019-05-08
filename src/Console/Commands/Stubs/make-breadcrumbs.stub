@@ -17,7 +17,7 @@ Breadcrumbs::for('admin.DummyRoute.show', function ($trail, $id) {
 
 Breadcrumbs::for('admin.DummyRoute.edit', function ($trail, $id) {
     $trail->parent('admin.DummyRoute.index');
-    $trail->push(__('backend.DummyRoute.labels.edit'), route('admin.DummyRoute.edit', $id));
+    $trail->push(__('backend_DummyRoute.labels.edit'), route('admin.DummyRoute.edit', $id));
 });
 
 Breadcrumbs::for('admin.DummyRoute.deleted', function ($trail) {

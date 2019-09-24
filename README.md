@@ -17,6 +17,7 @@ It has been tested with Laravel 5.7.
 
 ```
 composer require pqrs/l5b-crud
+composer require laravel/helpers
 ```
 
 ## Run

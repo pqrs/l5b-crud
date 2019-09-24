@@ -8,10 +8,10 @@ By default it does not overwrite any files that may exist with the pre-stablishe
 
 ## Requires
 
-- [Laravel 5](https://laravel.com)
+- [Laravel](https://laravel.com)
 - [rappasoft/laravel-5-boilerplate](https://www.github.com/rappasoft/laravel-5-boilerplate/)
 
-It has been tested with Laravel 5.7.
+It has been tested with Laravel 6.0.
 
 ## Install
 

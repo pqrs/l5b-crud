@@ -16,7 +16,7 @@ class DummyRepository extends BaseRepository
     /**
      * DummyRepository constructor.
      *
-     * @param  User  $model
+     * @param  DummyModel  $model
      */
     public function __construct(DummyModel $model)
     {

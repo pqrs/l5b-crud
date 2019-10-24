@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/DummyRoute*')) }}" href="{{ route('admin.DummyRoute.index') }}">
-        <i class="nav-icon icon-folder"></i> @lang('backend_DummyLabel.sidebar.title')
+    <a class="nav-link {{ active_class(Route::is('admin/DummyRoute*')) }}" href="{{ route('admin.DummyRoute.index') }}">
+        <i class="nav-icon fas fa-folder-open"></i> @lang('backend_DummyLabel.sidebar.title')
     </a>
 </li>

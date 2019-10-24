@@ -155,7 +155,7 @@ class L5BCrud extends Command
             'namespace'         => '\Events\Backend\\' . ucfirst(camel_case($key)),
             'event'             => ucfirst(camel_case($key)),
             'model'             => ucfirst(camel_case($key)),
-            'table'             =>  str_plural($key),
+            'table'             => $key,
             'field'             => $this->option('field'),
             '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
@@ -397,7 +397,7 @@ class L5BCrud extends Command
             'namespace'         => '\Events\Frontend\\' . ucfirst(camel_case($key)),
             'event'             => ucfirst(camel_case($key)),
             'model'             => ucfirst(camel_case($key)),
-            'table'             =>  str_plural($key),
+            'table'             => $key,
             'field'             => $this->option('field'),
             '--force'           => $this->hasOption('force') ? $this->option('force') : false,
         ];
